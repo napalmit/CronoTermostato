@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YahooWeatherDLL;
 
 namespace CTGUI
 {
@@ -20,7 +21,8 @@ namespace CTGUI
 
         private void testc()
         {
-            YahooWeather uy = new YahooWeather("courgne");
+            YahooWeather uy = new YahooWeather("cuorgne");
+            YahooWeatherCity city = uy.GetWeather();
         }
     }
 }

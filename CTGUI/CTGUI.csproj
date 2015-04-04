@@ -116,6 +116,12 @@
   <ItemGroup>
     <Folder Include="PANEL\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YahooWeatherDLL\YahooWeatherDLL.csproj">
+      <Project>{b6bce90f-0e59-4f16-8e29-2a046ebae387}</Project>
+      <Name>YahooWeatherDLL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
