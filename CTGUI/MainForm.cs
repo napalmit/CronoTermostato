@@ -15,6 +15,12 @@ namespace CTGUI
         public MainForm()
         {
             InitializeComponent();
+            testc();
+        }
+
+        private void testc()
+        {
+            YahooWeather uy = new YahooWeather("courgne");
         }
     }
 }
