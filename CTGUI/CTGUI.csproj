@@ -65,11 +65,17 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PANEL\HomeSlide.cs">
+    <Compile Include="PANEL\MenuSinistra.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PANEL\HomeSlide.Designer.cs">
-      <DependentUpon>HomeSlide.cs</DependentUpon>
+    <Compile Include="PANEL\MenuSinistra.Designer.cs">
+      <DependentUpon>MenuSinistra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PANEL\MuoviMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PANEL\MuoviMenu.Designer.cs">
+      <DependentUpon>MuoviMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="PANEL\Time.cs">
       <SubType>UserControl</SubType>
@@ -83,8 +89,11 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PANEL\HomeSlide.resx">
-      <DependentUpon>HomeSlide.cs</DependentUpon>
+    <EmbeddedResource Include="PANEL\MenuSinistra.resx">
+      <DependentUpon>MenuSinistra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PANEL\MuoviMenu.resx">
+      <DependentUpon>MuoviMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PANEL\Time.resx">
       <DependentUpon>Time.cs</DependentUpon>

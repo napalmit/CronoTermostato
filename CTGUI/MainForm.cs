@@ -23,7 +23,8 @@ namespace CTGUI
         public DateTime DATA_ULTIMA_OPERAZIONE { get; set; }
         public DateTime DATA_SISTEMA { get; set; }
         private Time PANEL_TIME;
-
+        private MenuSinistra PANEL_MENU_SINISTRA;
+        private MuoviMenu PANEL_MUOVI_MENU;
         public MainForm()
         {
             InitializeComponent();
@@ -44,8 +45,11 @@ namespace CTGUI
                 InitPanel();
 
                 ShowPANEL_TIME();
+                ShowPANEL_MENU_SINISTRA();
+                ShowPANEL_MUOVI_MENU();
 
                 imageSinistraAlto.Location = new Point(46, 0);
+                //imageSinistraAlto.BringToFront();
             }
             catch(Exception ex)
             {
@@ -64,9 +68,17 @@ namespace CTGUI
                 this.Controls.Add(PANEL_TIME);
                 PANEL_TIME.Hide();
 
+                PANEL_MENU_SINISTRA = new MenuSinistra();
+                PANEL_MENU_SINISTRA.MAINFORM = this;
+                PANEL_MENU_SINISTRA.Location = new Point(-140, 0);
+                this.Controls.Add(PANEL_MENU_SINISTRA);
+                PANEL_MENU_SINISTRA.Hide();
 
-
-                HideAll();
+                PANEL_MUOVI_MENU = new MuoviMenu();
+                PANEL_MUOVI_MENU.MAINFORM = this;
+                PANEL_MUOVI_MENU.Location = new Point(40, 248);
+                this.Controls.Add(PANEL_MUOVI_MENU);
+                PANEL_MUOVI_MENU.Hide();
             }
             catch (Exception ex)
             {
@@ -104,6 +116,38 @@ namespace CTGUI
             }
         }
 
+        public void ShowPANEL_MENU_SINISTRA()
+        {
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                PANEL_MENU_SINISTRA.SettingGUI();
+                PANEL_MENU_SINISTRA.Show();
+                PANEL_MENU_SINISTRA.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public void ShowPANEL_MUOVI_MENU()
+        {
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                PANEL_MUOVI_MENU.SettingGUI();
+                PANEL_MUOVI_MENU.Show();
+                PANEL_MUOVI_MENU.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
         private void testc()
         {
             YahooWeather uy = new YahooWeather("cuorgne");
@@ -118,6 +162,11 @@ namespace CTGUI
         private void button1_Click(object sender, EventArgs e)
         {
             GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
-        }       
+        }
+
+        internal void MuoviMenuSinistra(bool p, int PIXEL)
+        {
+            PANEL_MENU_SINISTRA.MuoviMenu(p, PIXEL);
+        }
     }
 }

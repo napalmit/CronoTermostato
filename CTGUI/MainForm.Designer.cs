@@ -71,8 +71,8 @@
             this.BackgroundImage = global::CTGUI.Properties.Resources.image_116;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1024, 600);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.imageSinistraAlto);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panelRigaBianca);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(100, 100);
