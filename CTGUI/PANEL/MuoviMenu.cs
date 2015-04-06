@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using CTGUI.UTILS;
 
 namespace CTGUI.PANEL
 {
@@ -20,6 +22,8 @@ namespace CTGUI.PANEL
         int PIXEL = 5;
         public MuoviMenu()
         {
+            this.DoubleBuffered = true;
+
             InitializeComponent();
             panelB.BackColor = Color.FromArgb(100, 0, 0, 93);
         }
@@ -53,6 +57,7 @@ namespace CTGUI.PANEL
         {
             TIMER.Enabled = true;
             TIMER.Start();
+            //GUI.Animate(this, GUI.Effect.Roll, 300, 0);
         }
 
         private void ActionClick()
@@ -66,7 +71,8 @@ namespace CTGUI.PANEL
                         COUNT++;
                         if (COUNT < COUNT_MAX)
                         {
-                            this.Location = new Point(this.Location.X - PIXEL, this.Location.Y);
+                            //this.Location = new Point(this.Location.X - PIXEL, this.Location.Y);
+                            this.Left = this.Left - PIXEL;
                             MAINFORM.MuoviMenuSinistra(false, PIXEL);
                         }
                         else
@@ -83,7 +89,8 @@ namespace CTGUI.PANEL
                         COUNT++;
                         if (COUNT < COUNT_MAX)
                         {
-                            this.Location = new Point(this.Location.X + PIXEL, this.Location.Y);
+                            //this.Location = new Point(this.Location.X + PIXEL, this.Location.Y);
+                            this.Left = this.Left + PIXEL;
                             MAINFORM.MuoviMenuSinistra(true, PIXEL);
                         }
                         else
@@ -105,5 +112,16 @@ namespace CTGUI.PANEL
             }
         }
 
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle = cp.ExStyle | 0x2000000;
+                return cp;
+            }
+        }
+
     }
+
 }

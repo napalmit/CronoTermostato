@@ -22,12 +22,15 @@ namespace CTGUI
         public FontFamily FONT_FAMILY { get; private set; }
         public DateTime DATA_ULTIMA_OPERAZIONE { get; set; }
         public DateTime DATA_SISTEMA { get; set; }
+
         private Time PANEL_TIME;
         private MenuSinistra PANEL_MENU_SINISTRA;
         private MuoviMenu PANEL_MUOVI_MENU;
+
         public MainForm()
         {
-            InitializeComponent();
+            this.DoubleBuffered = true;
+            InitializeComponent();           
             Init();           
         }
 
