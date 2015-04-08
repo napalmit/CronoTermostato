@@ -16,14 +16,7 @@ namespace WindowsFormsApplication4
         public Form1()
         {
             InitializeComponent();
-            Test();
         }
 
-        private void Test()
-        {
-            YahooWeather uy = new YahooWeather("cuorgne");
-            YahooWeatherCity city = uy.GetWeather();
-
-        }
     }
 }

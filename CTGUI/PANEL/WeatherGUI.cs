@@ -11,14 +11,16 @@ using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
 using Plasmoid.Extensions;
 using YahooWeatherDLL;
+using System.Globalization;
 
-namespace WindowsFormsApplication4
+namespace CTGUI.PANEL
 {
-    public partial class HomeGui : UserControl
+    public partial class WeatherGUI : UserControl
     {
 
-        public HomeGui()
+        public WeatherGUI()
         {
+            this.DoubleBuffered = true;
             InitializeComponent();
         }
 
@@ -29,7 +31,7 @@ namespace WindowsFormsApplication4
             panelA.BorderStyle = BorderStyle.None;
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            RectangleEdgeFilter none = RectangleEdgeFilter.TopLeft | RectangleEdgeFilter.TopRight;
+            RectangleEdgeFilter none = RectangleEdgeFilter.BottomLeft | RectangleEdgeFilter.BottomRight;
             graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(100, 0, 0, 93)), float.Parse("0" + 0), float.Parse("0" + 0), float.Parse("0" + panelA.Width), float.Parse("0" + panelA.Height), 10, none);
 
         }
@@ -40,14 +42,14 @@ namespace WindowsFormsApplication4
             panelB.BorderStyle = BorderStyle.None;
             Graphics graphics = e.Graphics;
             graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            RectangleEdgeFilter none = RectangleEdgeFilter.BottomRight;
+            RectangleEdgeFilter none = RectangleEdgeFilter.TopLeft;
             graphics.FillRoundedRectangle(new SolidBrush(Color.FromArgb(100, 0, 0, 93)), float.Parse("0" + 0), float.Parse("0" + 0), float.Parse("0" + panelB.Width), float.Parse("0" + panelB.Height), 10, none);
 
         }
         
         private void panelC_Paint(object sender, PaintEventArgs e)
         {
-            Point[] PUNTO = new Point[] { new Point(0, 0), new Point(80, 0), new Point(80, 80) };
+            Point[] PUNTO = new Point[] { new Point(0, 0), new Point(0, 80), new Point(80, 80) };
             panelC.BackColor = Color.Transparent;
             panelC.BorderStyle = BorderStyle.None;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.Half;
@@ -60,36 +62,23 @@ namespace WindowsFormsApplication4
         #endregion
 
         #region settaggio dati pannello
-        public void SetTemperatura(string temperatura, string scala)
+        public void SettingGUI(YahooWeatherCity city)
         {
             try
             {
-                lblValueTemperatura.Text = temperatura;
-                lblScalaTemperatura.Text = scala;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-        public void SetHumidity(string humidity, string scala)
-        {
-            try
-            {
-                lblValueUmidity.Text = humidity;
-                lblScalaHumidity.Text = scala;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-        public void SetStatoSystem(int statoSystem)
-        {
-            try
-            {
+                lblTodayDate.Text = DateTime.Now.ToString(" dddd, d MMM", new CultureInfo("it-IT")).ToUpper();
+                imgStateWeatherToday.Load(city.IMG_D);
+                lblValueTemperaturaToday.Text = city.TEMPERATURE + city.TEMPERATURE_UNIT;
+                //lblScalaTemperaturaToday.Text = city.TEMPERATURE_UNIT;
+                lblValueUmidityToday.Text = city.HUMIDITY;
+                //lblScalaTemperaturaToday.Text = "%";
+                lblHIToday.Text = city.LISTA_PREVISIONI[0].HIGH + "°";
+                lblLowToday.Text = city.LISTA_PREVISIONI[0].LOW + "°";
+
+                columnWeather1.SettingGUI(city.LISTA_PREVISIONI[1]);
+                columnWeather2.SettingGUI(city.LISTA_PREVISIONI[2]);
+                columnWeather3.SettingGUI(city.LISTA_PREVISIONI[3]);
+                columnWeather4.SettingGUI(city.LISTA_PREVISIONI[4]);
             }
             catch (Exception ex)
             {
@@ -98,5 +87,17 @@ namespace WindowsFormsApplication4
             }
         }
         #endregion
+
+        public MainForm MAINFORM { get; set; }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle = cp.ExStyle | 0x2000000;
+                return cp;
+            }
+        }
     }
 }

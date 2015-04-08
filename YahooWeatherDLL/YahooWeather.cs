@@ -60,7 +60,7 @@ namespace YahooWeatherDLL
 
                 yahooWeatherCity.COUNTRY = channel.SelectSingleNode("yweather:location", man).Attributes["country"].Value;
 
-                yahooWeatherCity.TEMPERATURE_UNIT = channel.SelectSingleNode("yweather:units", man).Attributes["temperature"].Value;
+                yahooWeatherCity.TEMPERATURE_UNIT = "°"+channel.SelectSingleNode("yweather:units", man).Attributes["temperature"].Value;
 
                 yahooWeatherCity.CHILL = channel.SelectSingleNode("yweather:wind", man).Attributes["chill"].Value;
 
@@ -91,7 +91,7 @@ namespace YahooWeatherDLL
                     previsione.DATA = DateTime.ParseExact(previsioneGiorno.Attributes["date"].Value, "d MMM yyyy",
                                        CultureInfo.CreateSpecificCulture("en-US"));
                     previsione.CODE = previsioneGiorno.Attributes["code"].Value;
-                    previsione.IMG = "http://l.yimg.com/a/i/us/we/52/" + previsione.CODE + ".gif";
+                    previsione.IMG = "http://l.yimg.com/a/i/us/nws/weather/gr/" + previsione.CODE + "s.png";
                     previsione.HIGH = previsioneGiorno.Attributes["high"].Value;
                     previsione.LOW = previsioneGiorno.Attributes["low"].Value;
                     yahooWeatherCity.LISTA_PREVISIONI.Add(previsione);

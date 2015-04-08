@@ -66,6 +66,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PANEL\ColumnWeather.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PANEL\ColumnWeather.Designer.cs">
+      <DependentUpon>ColumnWeather.cs</DependentUpon>
+    </Compile>
     <Compile Include="PANEL\HomeGui.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,12 +96,21 @@
     <Compile Include="PANEL\Time.Designer.cs">
       <DependentUpon>Time.cs</DependentUpon>
     </Compile>
+    <Compile Include="PANEL\WeatherGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PANEL\WeatherGUI.Designer.cs">
+      <DependentUpon>WeatherGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UTILS\GraphicsExtension.cs" />
     <Compile Include="UTILS\GUI.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PANEL\ColumnWeather.resx">
+      <DependentUpon>ColumnWeather.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PANEL\HomeGui.resx">
       <DependentUpon>HomeGui.cs</DependentUpon>
@@ -108,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PANEL\Time.resx">
       <DependentUpon>Time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PANEL\WeatherGUI.resx">
+      <DependentUpon>WeatherGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -150,20 +168,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\BreeSerif-Regular.otf" />
-    <None Include="Resources\image 116.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\home1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\YahooWeatherDLL\YahooWeatherDLL.csproj">
       <Project>{b6bce90f-0e59-4f16-8e29-2a046ebae387}</Project>
       <Name>YahooWeatherDLL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bg_image.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

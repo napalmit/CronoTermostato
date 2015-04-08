@@ -42,12 +42,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="YahooWeatherDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\YahooWeatherDLL.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColumnWeather.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ColumnWeather.Designer.cs">
+      <DependentUpon>ColumnWeather.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +57,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GraphicsExtension.cs" />
+    <Compile Include="WeatherGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WeatherGUI.Designer.cs">
+      <DependentUpon>WeatherGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeGui.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -63,8 +71,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ColumnWeather.resx">
+      <DependentUpon>ColumnWeather.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WeatherGUI.resx">
+      <DependentUpon>WeatherGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeGui.resx">
       <DependentUpon>HomeGui.cs</DependentUpon>
@@ -97,7 +111,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\system.gif" />
-    <Content Include="YahooWeatherDLL.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\YahooWeatherDLL\YahooWeatherDLL.csproj">
+      <Project>{b6bce90f-0e59-4f16-8e29-2a046ebae387}</Project>
+      <Name>YahooWeatherDLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

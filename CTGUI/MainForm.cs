@@ -28,6 +28,7 @@ namespace CTGUI
         private MenuSinistra PANEL_MENU_SINISTRA;
         private MuoviMenu PANEL_MUOVI_MENU;
         private HomeGui PANEL_HOME_GUI;
+        private WeatherGUI PANEL_WEATHER_GUI;
 
         public MainForm()
         {
@@ -49,6 +50,7 @@ namespace CTGUI
                 ShowPANEL_MUOVI_MENU();
                 Init_HOME_GUI(); //test
                 ShowPANEL_HOME_GUI();
+                PANEL_WEATHER_GUI.SettingGUI(WEATHER);
 
                 imageSinistraAlto.Hide();
             }
@@ -117,6 +119,12 @@ namespace CTGUI
                 PANEL_HOME_GUI.Location = new Point(175, 93);
                 this.Controls.Add(PANEL_HOME_GUI);
                 PANEL_HOME_GUI.Hide();
+
+                PANEL_WEATHER_GUI = new WeatherGUI();
+                PANEL_WEATHER_GUI.MAINFORM = this;
+                PANEL_WEATHER_GUI.Location = new Point(175, 93);
+                this.Controls.Add(PANEL_WEATHER_GUI);
+                PANEL_WEATHER_GUI.Hide();
             }
             catch (Exception ex)
             {
@@ -187,6 +195,22 @@ namespace CTGUI
             }
         }
 
+        public void ShowPANEL_WEATHER_GUI()
+        {
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                
+                PANEL_WEATHER_GUI.Show();
+                PANEL_WEATHER_GUI.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
         public void ShowPANEL_HOME_GUI()
         {
             try
@@ -209,8 +233,10 @@ namespace CTGUI
             {
                 // show imageSinistraAlto
                 GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0); 
-                //hide homeGui
+                //show homeGui
                 GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+                //hide weather gui
+                GUI.Animate(PANEL_WEATHER_GUI, GUI.Effect.Slide, 200, 45);
             }
             catch (Exception ex)
             {
@@ -240,6 +266,8 @@ namespace CTGUI
                 GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
                 //hide homeGui
                 GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+                //Show weather gui
+                GUI.Animate(PANEL_WEATHER_GUI, GUI.Effect.Slide, 200, 45);
             }
             catch (Exception ex)
             {

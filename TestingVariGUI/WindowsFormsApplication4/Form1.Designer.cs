@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.homeGui1 = new WindowsFormsApplication4.HomeGui();
+            this.weatherGUI1 = new WindowsFormsApplication4.WeatherGUI();
             this.SuspendLayout();
             // 
-            // homeGui1
+            // weatherGUI1
             // 
-            this.homeGui1.BackColor = System.Drawing.Color.Transparent;
-            this.homeGui1.Location = new System.Drawing.Point(165, 93);
-            this.homeGui1.Name = "homeGui1";
-            this.homeGui1.Size = new System.Drawing.Size(750, 428);
-            this.homeGui1.TabIndex = 0;
+            this.weatherGUI1.BackColor = System.Drawing.Color.Transparent;
+            this.weatherGUI1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.weatherGUI1.Location = new System.Drawing.Point(178, 44);
+            this.weatherGUI1.Name = "weatherGUI1";
+            this.weatherGUI1.Size = new System.Drawing.Size(750, 501);
+            this.weatherGUI1.TabIndex = 0;
             // 
             // Form1
             // 
@@ -46,7 +47,7 @@
             this.BackgroundImage = global::WindowsFormsApplication4.Properties.Resources.bg_image;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1008, 561);
-            this.Controls.Add(this.homeGui1);
+            this.Controls.Add(this.weatherGUI1);
             this.MaximumSize = new System.Drawing.Size(1024, 600);
             this.MinimumSize = new System.Drawing.Size(1024, 600);
             this.Name = "Form1";
@@ -57,7 +58,9 @@
 
         #endregion
 
-        private HomeGui homeGui1;
+        private WeatherGUI weatherGUI1;
+
+
 
     }
 }
