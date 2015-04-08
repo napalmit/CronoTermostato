@@ -57,7 +57,6 @@ namespace CTGUI.PANEL
         {
             TIMER.Enabled = true;
             TIMER.Start();
-            //GUI.Animate(this, GUI.Effect.Roll, 300, 0);
         }
 
         private void ActionClick()

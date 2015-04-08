@@ -34,7 +34,6 @@
             // homeGui1
             // 
             this.homeGui1.BackColor = System.Drawing.Color.Transparent;
-            this.homeGui1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.homeGui1.Location = new System.Drawing.Point(165, 93);
             this.homeGui1.Name = "homeGui1";
             this.homeGui1.Size = new System.Drawing.Size(750, 428);

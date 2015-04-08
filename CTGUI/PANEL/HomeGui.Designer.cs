@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication4
+﻿namespace CTGUI.PANEL
 {
     partial class HomeGui
     {
@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeGui));
             this.panelA = new System.Windows.Forms.Panel();
+            this.imgStateWeather = new System.Windows.Forms.PictureBox();
             this.lblScalaTemperatura = new System.Windows.Forms.Label();
             this.lblValueTemperatura = new System.Windows.Forms.Label();
             this.panelC = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.imgStateWeather = new System.Windows.Forms.PictureBox();
             this.lblTypeSystem = new System.Windows.Forms.Label();
             this.imgSystem = new System.Windows.Forms.PictureBox();
             this.lblValueUmidity = new System.Windows.Forms.Label();
@@ -59,6 +59,17 @@
             this.panelA.Size = new System.Drawing.Size(750, 287);
             this.panelA.TabIndex = 0;
             this.panelA.Paint += new System.Windows.Forms.PaintEventHandler(this.panelA_Paint);
+            // 
+            // imgStateWeather
+            // 
+            this.imgStateWeather.BackColor = System.Drawing.Color.Transparent;
+            this.imgStateWeather.Location = new System.Drawing.Point(549, 100);
+            this.imgStateWeather.Name = "imgStateWeather";
+            this.imgStateWeather.Size = new System.Drawing.Size(250, 180);
+            this.imgStateWeather.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgStateWeather.TabIndex = 6;
+            this.imgStateWeather.TabStop = false;
+            this.imgStateWeather.Click += new System.EventHandler(this.imgStateWeather_Click);
             // 
             // lblScalaTemperatura
             // 
@@ -98,16 +109,6 @@
             this.label1.Size = new System.Drawing.Size(167, 48);
             this.label1.TabIndex = 3;
             this.label1.Text = "INDOOR";
-            // 
-            // imgStateWeather
-            // 
-            this.imgStateWeather.BackColor = System.Drawing.Color.Transparent;
-            this.imgStateWeather.Location = new System.Drawing.Point(549, 100);
-            this.imgStateWeather.Name = "imgStateWeather";
-            this.imgStateWeather.Size = new System.Drawing.Size(250, 180);
-            this.imgStateWeather.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgStateWeather.TabIndex = 6;
-            this.imgStateWeather.TabStop = false;
             // 
             // lblTypeSystem
             // 

@@ -22,9 +22,9 @@ namespace YahooWeatherDLL
 
         public string HUMIDITY { get; set; }
 
-        public string SUNRISE { get; set; }
+        public DateTime SUNRISE { get; set; }
 
-        public string SUNSET { get; set; }
+        public DateTime SUNSET { get; set; }
 
         public List<Previsione> LISTA_PREVISIONI { get; set; }
 
@@ -32,7 +32,12 @@ namespace YahooWeatherDLL
 
         public string TEMPERATURE_UNIT { get; set; }
 
-        public string IMG { get; set; }
+        public string IMG_D { get; set; }
+
+        public string IMG_N { get; set; }
+
+        public string IMG_S { get; set; }
+
     }
 
     public class Previsione

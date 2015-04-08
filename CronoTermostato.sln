@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTGUI", "CTGUI\CTGUI.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YahooWeatherDLL", "YahooWeatherDLL\YahooWeatherDLL.csproj", "{B6BCE90F-0E59-4F16-8E29-2A046EBAE387}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingVariGUI", "TestingVariGUI\WindowsFormsApplication4\TestingVariGUI.csproj", "{C1D173D7-89A8-4C7E-B951-004B724BA2CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B6BCE90F-0E59-4F16-8E29-2A046EBAE387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6BCE90F-0E59-4F16-8E29-2A046EBAE387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6BCE90F-0E59-4F16-8E29-2A046EBAE387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D173D7-89A8-4C7E-B951-004B724BA2CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D173D7-89A8-4C7E-B951-004B724BA2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D173D7-89A8-4C7E-B951-004B724BA2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D173D7-89A8-4C7E-B951-004B724BA2CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

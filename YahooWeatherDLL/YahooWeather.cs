@@ -66,15 +66,21 @@ namespace YahooWeatherDLL
 
                 yahooWeatherCity.HUMIDITY = channel.SelectSingleNode("yweather:atmosphere", man).Attributes["humidity"].Value;
 
-                yahooWeatherCity.SUNRISE = channel.SelectSingleNode("yweather:astronomy", man).Attributes["sunrise"].Value;
+                string sunrise = channel.SelectSingleNode("yweather:astronomy", man).Attributes["sunrise"].Value;
+                yahooWeatherCity.SUNRISE = DateTime.ParseExact(sunrise, "h:mm tt", System.Globalization.CultureInfo.InvariantCulture);
 
-                yahooWeatherCity.SUNSET = channel.SelectSingleNode("yweather:astronomy", man).Attributes["sunset"].Value;
+                string sunset = channel.SelectSingleNode("yweather:astronomy", man).Attributes["sunset"].Value;
+                yahooWeatherCity.SUNSET = DateTime.ParseExact(sunset, "h:mm tt", System.Globalization.CultureInfo.InvariantCulture);
 
                 yahooWeatherCity.CODE = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", man).Attributes["code"].Value;
 
                 yahooWeatherCity.TEMPERATURE = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", man).Attributes["temp"].Value;
 
-                yahooWeatherCity.IMG = "http://l.yimg.com/a/i/us/we/52/" + yahooWeatherCity.CODE + ".gif";
+                yahooWeatherCity.IMG_D = "http://l.yimg.com/a/i/us/nws/weather/gr/" + yahooWeatherCity.CODE + "d.png";
+
+                yahooWeatherCity.IMG_N = "http://l.yimg.com/a/i/us/nws/weather/gr/" + yahooWeatherCity.CODE + "n.png";
+
+                yahooWeatherCity.IMG_S = "http://l.yimg.com/a/i/us/nws/weather/gr/" + yahooWeatherCity.CODE + "s.png";
 
                 yahooWeatherCity.LISTA_PREVISIONI = new List<Previsione>();
                 XmlNodeList previsioni = channel.SelectSingleNode("item").SelectNodes("yweather:forecast", man);

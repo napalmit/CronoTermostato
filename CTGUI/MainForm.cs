@@ -22,10 +22,12 @@ namespace CTGUI
         public FontFamily FONT_FAMILY { get; private set; }
         public DateTime DATA_ULTIMA_OPERAZIONE { get; set; }
         public DateTime DATA_SISTEMA { get; set; }
+        public YahooWeatherCity WEATHER { get; set; }
 
         private Time PANEL_TIME;
         private MenuSinistra PANEL_MENU_SINISTRA;
         private MuoviMenu PANEL_MUOVI_MENU;
+        private HomeGui PANEL_HOME_GUI;
 
         public MainForm()
         {
@@ -38,23 +40,50 @@ namespace CTGUI
         {
             try
             {
-                #region font
-                var pfc = new PrivateFontCollection();
-                pfc.AddFontFile(@"BreeSerif-Regular.ttf");
-                FONT_FAMILY = pfc.Families[0];
-                //label1.Font = new Font(FONT_FAMILY, 14, FontStyle.Regular);
-                #endregion
-
                 InitPanel();
+
+                InitWeather();
 
                 ShowPANEL_TIME();
                 ShowPANEL_MENU_SINISTRA();
                 ShowPANEL_MUOVI_MENU();
+                Init_HOME_GUI(); //test
+                ShowPANEL_HOME_GUI();
 
-                imageSinistraAlto.Location = new Point(46, 0);
-                //imageSinistraAlto.BringToFront();
+                imageSinistraAlto.Hide();
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private void Init_HOME_GUI()
+        {
+            try
+            {
+                PANEL_HOME_GUI.SetTemperatura("18,3", "°C");
+                PANEL_HOME_GUI.SetHumidity("75","%");
+                if ((DateTime.Now > WEATHER.SUNRISE) && (DateTime.Now < WEATHER.SUNSET))
+                    PANEL_HOME_GUI.SetWeatherImage(WEATHER.IMG_D);
+                else
+                    PANEL_HOME_GUI.SetWeatherImage(WEATHER.IMG_N);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private void InitWeather()
+        {
+            try
+            {
+                WEATHER = new YahooWeather("cuorgne").GetWeather();
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
@@ -82,6 +111,12 @@ namespace CTGUI
                 PANEL_MUOVI_MENU.Location = new Point(40, 248);
                 this.Controls.Add(PANEL_MUOVI_MENU);
                 PANEL_MUOVI_MENU.Hide();
+
+                PANEL_HOME_GUI = new HomeGui();
+                PANEL_HOME_GUI.MAINFORM = this;
+                PANEL_HOME_GUI.Location = new Point(175, 93);
+                this.Controls.Add(PANEL_HOME_GUI);
+                PANEL_HOME_GUI.Hide();
             }
             catch (Exception ex)
             {
@@ -103,6 +138,7 @@ namespace CTGUI
             }
         }
 
+        #region ShowPANEL
         public void ShowPANEL_TIME()
         {
             try
@@ -151,15 +187,37 @@ namespace CTGUI
             }
         }
 
-        private void testc()
+        public void ShowPANEL_HOME_GUI()
         {
-            YahooWeather uy = new YahooWeather("cuorgne");
-            YahooWeatherCity city = uy.GetWeather();
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                PANEL_HOME_GUI.Show();
+                PANEL_HOME_GUI.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
         }
+        #endregion
 
         private void imageSinistraAlto_Click(object sender, EventArgs e)
         {
-            GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);            
+            try
+            {
+                // show imageSinistraAlto
+                GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0); 
+                //hide homeGui
+                GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+                       
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -170,6 +228,24 @@ namespace CTGUI
         internal void MuoviMenuSinistra(bool p, int PIXEL)
         {
             PANEL_MENU_SINISTRA.MuoviMenu(p, PIXEL);
+            PANEL_MUOVI_MENU.BringToFront();
+        }
+
+
+        internal void ClickHomeGuiWeather()
+        {
+            try
+            {
+                // show imageSinistraAlto
+                GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
+                //hide homeGui
+                GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
         }
     }
 }
