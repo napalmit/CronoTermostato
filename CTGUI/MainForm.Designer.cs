@@ -49,7 +49,7 @@
             this.imageSinistraAlto.Location = new System.Drawing.Point(46, 4);
             this.imageSinistraAlto.Name = "imageSinistraAlto";
             this.imageSinistraAlto.Size = new System.Drawing.Size(103, 29);
-            this.imageSinistraAlto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imageSinistraAlto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imageSinistraAlto.TabIndex = 1;
             this.imageSinistraAlto.TabStop = false;
             this.imageSinistraAlto.Click += new System.EventHandler(this.imageSinistraAlto_Click);
@@ -74,7 +74,6 @@
             this.Text = "MainForm";
             ((System.ComponentModel.ISupportInitialize)(this.imageSinistraAlto)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

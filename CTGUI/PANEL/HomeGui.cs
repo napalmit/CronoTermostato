@@ -20,6 +20,14 @@ namespace CTGUI.PANEL
         {
             this.DoubleBuffered = true;
             InitializeComponent();
+            HideHumidity();
+        }
+
+        private void HideHumidity()
+        {
+            lblScalaHumidity.Hide();
+            lblValueUmidity.Hide();
+            lblHumidity.Hide();
         }
 
         #region paint panel
@@ -124,6 +132,17 @@ namespace CTGUI.PANEL
                 cp.ExStyle = cp.ExStyle | 0x2000000;
                 return cp;
             }
+        }
+
+        internal void AttivaSistema()
+        {
+            imgON.Show();
+            imgON.BringToFront();
+        }
+
+        internal void DisattivaSistema()
+        {
+            imgON.Hide();
         }
     }
 }

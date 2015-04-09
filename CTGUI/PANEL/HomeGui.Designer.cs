@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeGui));
             this.panelA = new System.Windows.Forms.Panel();
+            this.imgON = new System.Windows.Forms.PictureBox();
             this.imgStateWeather = new System.Windows.Forms.PictureBox();
             this.lblScalaTemperatura = new System.Windows.Forms.Label();
             this.lblValueTemperatura = new System.Windows.Forms.Label();
@@ -40,9 +41,10 @@
             this.lblValueUmidity = new System.Windows.Forms.Label();
             this.lblSystem = new System.Windows.Forms.Label();
             this.lblScalaHumidity = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblHumidity = new System.Windows.Forms.Label();
             this.panelB = new System.Windows.Forms.Panel();
             this.panelA.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgON)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStateWeather)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSystem)).BeginInit();
             this.panelB.SuspendLayout();
@@ -51,6 +53,7 @@
             // panelA
             // 
             this.panelA.BackColor = System.Drawing.Color.Transparent;
+            this.panelA.Controls.Add(this.imgON);
             this.panelA.Controls.Add(this.imgStateWeather);
             this.panelA.Controls.Add(this.lblScalaTemperatura);
             this.panelA.Controls.Add(this.lblValueTemperatura);
@@ -60,10 +63,21 @@
             this.panelA.TabIndex = 0;
             this.panelA.Paint += new System.Windows.Forms.PaintEventHandler(this.panelA_Paint);
             // 
+            // imgON
+            // 
+            this.imgON.BackColor = System.Drawing.Color.Transparent;
+            this.imgON.Image = global::CTGUI.Properties.Resources.fuoco_animato;
+            this.imgON.Location = new System.Drawing.Point(571, 125);
+            this.imgON.Name = "imgON";
+            this.imgON.Size = new System.Drawing.Size(110, 155);
+            this.imgON.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgON.TabIndex = 7;
+            this.imgON.TabStop = false;
+            // 
             // imgStateWeather
             // 
             this.imgStateWeather.BackColor = System.Drawing.Color.Transparent;
-            this.imgStateWeather.Location = new System.Drawing.Point(549, 100);
+            this.imgStateWeather.Location = new System.Drawing.Point(549, 0);
             this.imgStateWeather.Name = "imgStateWeather";
             this.imgStateWeather.Size = new System.Drawing.Size(250, 180);
             this.imgStateWeather.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -73,21 +87,22 @@
             // 
             // lblScalaTemperatura
             // 
-            this.lblScalaTemperatura.Font = new System.Drawing.Font("Montserrat", 41.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScalaTemperatura.AutoSize = true;
+            this.lblScalaTemperatura.Font = new System.Drawing.Font("Montserrat", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScalaTemperatura.ForeColor = System.Drawing.Color.White;
-            this.lblScalaTemperatura.Location = new System.Drawing.Point(520, 15);
+            this.lblScalaTemperatura.Location = new System.Drawing.Point(447, 30);
             this.lblScalaTemperatura.Name = "lblScalaTemperatura";
-            this.lblScalaTemperatura.Size = new System.Drawing.Size(88, 61);
+            this.lblScalaTemperatura.Size = new System.Drawing.Size(75, 58);
             this.lblScalaTemperatura.TabIndex = 1;
             this.lblScalaTemperatura.Text = "°C";
             // 
             // lblValueTemperatura
             // 
-            this.lblValueTemperatura.Font = new System.Drawing.Font("Montserrat", 180F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValueTemperatura.Font = new System.Drawing.Font("Montserrat", 170.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblValueTemperatura.ForeColor = System.Drawing.Color.White;
-            this.lblValueTemperatura.Location = new System.Drawing.Point(-21, -24);
+            this.lblValueTemperatura.Location = new System.Drawing.Point(-45, -24);
             this.lblValueTemperatura.Name = "lblValueTemperatura";
-            this.lblValueTemperatura.Size = new System.Drawing.Size(629, 273);
+            this.lblValueTemperatura.Size = new System.Drawing.Size(593, 273);
             this.lblValueTemperatura.TabIndex = 0;
             this.lblValueTemperatura.Text = "88,8";
             // 
@@ -114,7 +129,7 @@
             // 
             this.lblTypeSystem.Font = new System.Drawing.Font("Roboto", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTypeSystem.ForeColor = System.Drawing.Color.White;
-            this.lblTypeSystem.Location = new System.Drawing.Point(525, 25);
+            this.lblTypeSystem.Location = new System.Drawing.Point(208, 25);
             this.lblTypeSystem.Name = "lblTypeSystem";
             this.lblTypeSystem.Size = new System.Drawing.Size(145, 33);
             this.lblTypeSystem.TabIndex = 4;
@@ -124,7 +139,7 @@
             // imgSystem
             // 
             this.imgSystem.Image = ((System.Drawing.Image)(resources.GetObject("imgSystem.Image")));
-            this.imgSystem.Location = new System.Drawing.Point(322, 1);
+            this.imgSystem.Location = new System.Drawing.Point(5, 1);
             this.imgSystem.Name = "imgSystem";
             this.imgSystem.Size = new System.Drawing.Size(100, 78);
             this.imgSystem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -135,7 +150,7 @@
             // 
             this.lblValueUmidity.Font = new System.Drawing.Font("Montserrat", 62.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblValueUmidity.ForeColor = System.Drawing.Color.White;
-            this.lblValueUmidity.Location = new System.Drawing.Point(-10, -13);
+            this.lblValueUmidity.Location = new System.Drawing.Point(361, -9);
             this.lblValueUmidity.Name = "lblValueUmidity";
             this.lblValueUmidity.Size = new System.Drawing.Size(149, 93);
             this.lblValueUmidity.TabIndex = 5;
@@ -146,7 +161,7 @@
             // 
             this.lblSystem.Font = new System.Drawing.Font("Roboto", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSystem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(39)))));
-            this.lblSystem.Location = new System.Drawing.Point(428, 25);
+            this.lblSystem.Location = new System.Drawing.Point(111, 25);
             this.lblSystem.Name = "lblSystem";
             this.lblSystem.Size = new System.Drawing.Size(115, 33);
             this.lblSystem.TabIndex = 3;
@@ -157,32 +172,32 @@
             // 
             this.lblScalaHumidity.Font = new System.Drawing.Font("Montserrat", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScalaHumidity.ForeColor = System.Drawing.Color.White;
-            this.lblScalaHumidity.Location = new System.Drawing.Point(117, 8);
+            this.lblScalaHumidity.Location = new System.Drawing.Point(488, -2);
             this.lblScalaHumidity.Name = "lblScalaHumidity";
             this.lblScalaHumidity.Size = new System.Drawing.Size(43, 37);
             this.lblScalaHumidity.TabIndex = 5;
             this.lblScalaHumidity.Text = "%";
             // 
-            // label2
+            // lblHumidity
             // 
-            this.label2.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(39)))));
-            this.label2.Location = new System.Drawing.Point(151, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 80);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Humidity";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblHumidity.Font = new System.Drawing.Font("Roboto", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHumidity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(39)))));
+            this.lblHumidity.Location = new System.Drawing.Point(518, 4);
+            this.lblHumidity.Name = "lblHumidity";
+            this.lblHumidity.Size = new System.Drawing.Size(150, 80);
+            this.lblHumidity.TabIndex = 5;
+            this.lblHumidity.Text = "Humidity";
+            this.lblHumidity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelB
             // 
             this.panelB.BackColor = System.Drawing.Color.Transparent;
-            this.panelB.Controls.Add(this.label2);
             this.panelB.Controls.Add(this.lblScalaHumidity);
             this.panelB.Controls.Add(this.lblSystem);
-            this.panelB.Controls.Add(this.lblValueUmidity);
             this.panelB.Controls.Add(this.imgSystem);
             this.panelB.Controls.Add(this.lblTypeSystem);
+            this.panelB.Controls.Add(this.lblValueUmidity);
+            this.panelB.Controls.Add(this.lblHumidity);
             this.panelB.Location = new System.Drawing.Point(79, 321);
             this.panelB.Name = "panelB";
             this.panelB.Size = new System.Drawing.Size(671, 81);
@@ -201,6 +216,8 @@
             this.Name = "HomeGui";
             this.Size = new System.Drawing.Size(752, 520);
             this.panelA.ResumeLayout(false);
+            this.panelA.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgON)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStateWeather)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSystem)).EndInit();
             this.panelB.ResumeLayout(false);
@@ -222,7 +239,8 @@
         private System.Windows.Forms.Label lblValueUmidity;
         private System.Windows.Forms.Label lblSystem;
         private System.Windows.Forms.Label lblScalaHumidity;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblHumidity;
         private System.Windows.Forms.Panel panelB;
+        private System.Windows.Forms.PictureBox imgON;
     }
 }

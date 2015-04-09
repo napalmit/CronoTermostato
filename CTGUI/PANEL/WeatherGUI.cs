@@ -67,7 +67,10 @@ namespace CTGUI.PANEL
             try
             {
                 lblTodayDate.Text = DateTime.Now.ToString(" dddd, d MMM", new CultureInfo("it-IT")).ToUpper();
-                imgStateWeatherToday.Load(city.IMG_D);
+                if(DateTime.Now > city.SUNRISE && DateTime.Now < city.SUNSET)
+                    imgStateWeatherToday.Load(city.IMG_D);
+                else
+                    imgStateWeatherToday.Load(city.IMG_N);
                 lblValueTemperaturaToday.Text = city.TEMPERATURE + city.TEMPERATURE_UNIT;
                 //lblScalaTemperaturaToday.Text = city.TEMPERATURE_UNIT;
                 lblValueUmidityToday.Text = city.HUMIDITY;
