@@ -20,6 +20,7 @@ namespace CTGUI.PANEL
         {
             this.DoubleBuffered = true;
             InitializeComponent();
+            lblValueTemperatura.Hide();
             HideHumidity();
         }
 
@@ -72,8 +73,10 @@ namespace CTGUI.PANEL
         {
             try
             {
-                lblValueTemperatura.Text = temperatura;
-                lblScalaTemperatura.Text = scala;
+                string text = "<span style=\"color: white; font-family: Montserrat; font-size: 170pt\">"+temperatura+"</span><span style=\"color: white; font-family: Montserrat; font-size: 30pt\" >°C</span>";
+                //lblValueTemperatura.Text = temperatura;
+                lblHtmlTemperatura.Text = text;
+                //lblScalaTemperatura.Text = scala;
             }
             catch (Exception ex)
             {

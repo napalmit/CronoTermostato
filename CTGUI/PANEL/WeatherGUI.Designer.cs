@@ -31,20 +31,19 @@
             this.panelC = new System.Windows.Forms.Panel();
             this.panelB = new System.Windows.Forms.Panel();
             this.lblLowToday = new System.Windows.Forms.Label();
-            this.lblScalaHumidityToday = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblValueUmidityToday = new System.Windows.Forms.Label();
             this.lblHIToday = new System.Windows.Forms.Label();
             this.lblHumidity = new System.Windows.Forms.Label();
-            this.lblValueTemperaturaToday = new System.Windows.Forms.Label();
             this.imgStateWeatherToday = new System.Windows.Forms.PictureBox();
             this.panelA = new System.Windows.Forms.Panel();
+            this.lblTodayDate = new System.Windows.Forms.Label();
+            this.lblHtmlTemperature = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
             this.columnWeather4 = new CTGUI.PANEL.ColumnWeather();
             this.columnWeather3 = new CTGUI.PANEL.ColumnWeather();
             this.columnWeather2 = new CTGUI.PANEL.ColumnWeather();
             this.columnWeather1 = new CTGUI.PANEL.ColumnWeather();
-            this.lblTodayDate = new System.Windows.Forms.Label();
+            this.lblHtmlHumidity = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
             this.panelB.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgStateWeatherToday)).BeginInit();
             this.panelA.SuspendLayout();
@@ -61,15 +60,14 @@
             // panelB
             // 
             this.panelB.BackColor = System.Drawing.Color.Transparent;
+            this.panelB.Controls.Add(this.lblHtmlTemperature);
             this.panelB.Controls.Add(this.lblLowToday);
-            this.panelB.Controls.Add(this.lblScalaHumidityToday);
             this.panelB.Controls.Add(this.label1);
             this.panelB.Controls.Add(this.label2);
-            this.panelB.Controls.Add(this.lblValueUmidityToday);
             this.panelB.Controls.Add(this.lblHIToday);
             this.panelB.Controls.Add(this.lblHumidity);
-            this.panelB.Controls.Add(this.lblValueTemperaturaToday);
             this.panelB.Controls.Add(this.imgStateWeatherToday);
+            this.panelB.Controls.Add(this.lblHtmlHumidity);
             this.panelB.Location = new System.Drawing.Point(0, 38);
             this.panelB.Name = "panelB";
             this.panelB.Size = new System.Drawing.Size(671, 195);
@@ -86,16 +84,6 @@
             this.lblLowToday.Size = new System.Drawing.Size(57, 38);
             this.lblLowToday.TabIndex = 8;
             this.lblLowToday.Text = "LO";
-            // 
-            // lblScalaHumidityToday
-            // 
-            this.lblScalaHumidityToday.Font = new System.Drawing.Font("Montserrat", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScalaHumidityToday.ForeColor = System.Drawing.Color.White;
-            this.lblScalaHumidityToday.Location = new System.Drawing.Point(598, 6);
-            this.lblScalaHumidityToday.Name = "lblScalaHumidityToday";
-            this.lblScalaHumidityToday.Size = new System.Drawing.Size(34, 26);
-            this.lblScalaHumidityToday.TabIndex = 6;
-            this.lblScalaHumidityToday.Text = "%";
             // 
             // label1
             // 
@@ -119,16 +107,6 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "LO";
             // 
-            // lblValueUmidityToday
-            // 
-            this.lblValueUmidityToday.Font = new System.Drawing.Font("Montserrat", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValueUmidityToday.ForeColor = System.Drawing.Color.White;
-            this.lblValueUmidityToday.Location = new System.Drawing.Point(495, -10);
-            this.lblValueUmidityToday.Name = "lblValueUmidityToday";
-            this.lblValueUmidityToday.Size = new System.Drawing.Size(121, 76);
-            this.lblValueUmidityToday.TabIndex = 7;
-            this.lblValueUmidityToday.Text = "88";
-            // 
             // lblHIToday
             // 
             this.lblHIToday.AutoSize = true;
@@ -150,17 +128,6 @@
             this.lblHumidity.TabIndex = 10;
             this.lblHumidity.Text = "Humidity";
             this.lblHumidity.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lblValueTemperaturaToday
-            // 
-            this.lblValueTemperaturaToday.Font = new System.Drawing.Font("Montserrat", 80.24999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValueTemperaturaToday.ForeColor = System.Drawing.Color.White;
-            this.lblValueTemperaturaToday.Location = new System.Drawing.Point(189, 40);
-            this.lblValueTemperaturaToday.Name = "lblValueTemperaturaToday";
-            this.lblValueTemperaturaToday.Size = new System.Drawing.Size(323, 126);
-            this.lblValueTemperaturaToday.TabIndex = 8;
-            this.lblValueTemperaturaToday.Text = "88,8";
-            this.lblValueTemperaturaToday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // imgStateWeatherToday
             // 
@@ -184,6 +151,28 @@
             this.panelA.Size = new System.Drawing.Size(750, 380);
             this.panelA.TabIndex = 0;
             this.panelA.Paint += new System.Windows.Forms.PaintEventHandler(this.panelA_Paint);
+            // 
+            // lblTodayDate
+            // 
+            this.lblTodayDate.AutoSize = true;
+            this.lblTodayDate.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTodayDate.ForeColor = System.Drawing.Color.White;
+            this.lblTodayDate.Location = new System.Drawing.Point(-1, -1);
+            this.lblTodayDate.Name = "lblTodayDate";
+            this.lblTodayDate.Size = new System.Drawing.Size(135, 38);
+            this.lblTodayDate.TabIndex = 4;
+            this.lblTodayDate.Text = "INDOOR";
+            // 
+            // lblHtmlTemperature
+            // 
+            this.lblHtmlTemperature.BackColor = System.Drawing.Color.Transparent;
+            this.lblHtmlTemperature.BaseStylesheet = null;
+            this.lblHtmlTemperature.Location = new System.Drawing.Point(222, 40);
+            this.lblHtmlTemperature.Name = "lblHtmlTemperature";
+            this.lblHtmlTemperature.Size = new System.Drawing.Size(252, 128);
+            this.lblHtmlTemperature.TabIndex = 11;
+            this.lblHtmlTemperature.Text = "<span style=\"color: white; font-family: Montserrat; font-size: 80pt\">88,8</span><" +
+    "span style=\"color: white; font-family: Montserrat; font-size: 20pt;>°C</span>";
             // 
             // columnWeather4
             // 
@@ -217,16 +206,16 @@
             this.columnWeather1.Size = new System.Drawing.Size(148, 230);
             this.columnWeather1.TabIndex = 0;
             // 
-            // lblTodayDate
+            // lblHtmlHumidity
             // 
-            this.lblTodayDate.AutoSize = true;
-            this.lblTodayDate.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTodayDate.ForeColor = System.Drawing.Color.White;
-            this.lblTodayDate.Location = new System.Drawing.Point(-1, -1);
-            this.lblTodayDate.Name = "lblTodayDate";
-            this.lblTodayDate.Size = new System.Drawing.Size(135, 38);
-            this.lblTodayDate.TabIndex = 4;
-            this.lblTodayDate.Text = "INDOOR";
+            this.lblHtmlHumidity.BackColor = System.Drawing.Color.Transparent;
+            this.lblHtmlHumidity.BaseStylesheet = null;
+            this.lblHtmlHumidity.Location = new System.Drawing.Point(512, -3);
+            this.lblHtmlHumidity.Name = "lblHtmlHumidity";
+            this.lblHtmlHumidity.Size = new System.Drawing.Size(100, 77);
+            this.lblHtmlHumidity.TabIndex = 12;
+            this.lblHtmlHumidity.Text = "<span style=\"color: white; font-family: Montserrat; font-size: 48pt\">50</span><sp" +
+    "an style=\"color: white; font-family: Montserrat; font-size: 15pt;>%</span>";
             // 
             // WeatherGUI
             // 
@@ -255,9 +244,6 @@
         private System.Windows.Forms.Panel panelA;
         private System.Windows.Forms.Label lblTodayDate;
         private System.Windows.Forms.PictureBox imgStateWeatherToday;
-        private System.Windows.Forms.Label lblValueTemperaturaToday;
-        private System.Windows.Forms.Label lblScalaHumidityToday;
-        private System.Windows.Forms.Label lblValueUmidityToday;
         private System.Windows.Forms.Label lblHumidity;
         private System.Windows.Forms.Label lblLowToday;
         private System.Windows.Forms.Label label1;
@@ -267,5 +253,7 @@
         private ColumnWeather columnWeather4;
         private ColumnWeather columnWeather3;
         private ColumnWeather columnWeather2;
+        private TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel lblHtmlTemperature;
+        private TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel lblHtmlHumidity;
     }
 }

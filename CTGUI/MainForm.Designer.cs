@@ -81,6 +81,7 @@
 
         private System.Windows.Forms.Panel panelRigaBianca;
         private System.Windows.Forms.PictureBox imageSinistraAlto;
+        
 
 
 

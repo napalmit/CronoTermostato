@@ -44,8 +44,8 @@ namespace CTGUI
 
         public MainForm()
         {
-            this.DoubleBuffered = true;
-            InitializeComponent();           
+            //this.DoubleBuffered = true;
+            InitializeComponent();          
             Init();           
         }
 
@@ -78,7 +78,7 @@ namespace CTGUI
                 ShowPANEL_MENU_SINISTRA();
                 ShowPANEL_MUOVI_MENU();               
                 ShowPANEL_HOME_GUI();
-                SetStatoSistema(StatoSistema.OFF);
+                SetStatoSistema(StatoSistema.ON);
                 imageSinistraAlto.Hide();
                 
                 //setto le variabili e altro
@@ -97,7 +97,7 @@ namespace CTGUI
             try
             {
                 //aggiorno la temperatura
-                int test1 = new Random().Next(10, 25);
+                int test1 = new Random().Next(18, 20);
                 int test2 = new Random().Next(0, 9);
                 this.Invoke(new DelegateTwoString(PANEL_HOME_GUI.SetTemperatura), test1 + "," + test2, "°C");
             }

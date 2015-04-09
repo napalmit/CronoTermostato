@@ -1,4 +1,5 @@
-﻿namespace CTGUI.PANEL
+﻿using System.Windows.Forms;
+namespace CTGUI.PANEL
 {
     partial class HomeGui
     {
@@ -32,7 +33,6 @@
             this.panelA = new System.Windows.Forms.Panel();
             this.imgON = new System.Windows.Forms.PictureBox();
             this.imgStateWeather = new System.Windows.Forms.PictureBox();
-            this.lblScalaTemperatura = new System.Windows.Forms.Label();
             this.lblValueTemperatura = new System.Windows.Forms.Label();
             this.panelC = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,6 +43,7 @@
             this.lblScalaHumidity = new System.Windows.Forms.Label();
             this.lblHumidity = new System.Windows.Forms.Label();
             this.panelB = new System.Windows.Forms.Panel();
+            this.lblHtmlTemperatura = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
             this.panelA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgON)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStateWeather)).BeginInit();
@@ -53,9 +54,9 @@
             // panelA
             // 
             this.panelA.BackColor = System.Drawing.Color.Transparent;
+            this.panelA.Controls.Add(this.lblHtmlTemperatura);
             this.panelA.Controls.Add(this.imgON);
             this.panelA.Controls.Add(this.imgStateWeather);
-            this.panelA.Controls.Add(this.lblScalaTemperatura);
             this.panelA.Controls.Add(this.lblValueTemperatura);
             this.panelA.Location = new System.Drawing.Point(0, 35);
             this.panelA.Name = "panelA";
@@ -85,24 +86,13 @@
             this.imgStateWeather.TabStop = false;
             this.imgStateWeather.Click += new System.EventHandler(this.imgStateWeather_Click);
             // 
-            // lblScalaTemperatura
-            // 
-            this.lblScalaTemperatura.AutoSize = true;
-            this.lblScalaTemperatura.Font = new System.Drawing.Font("Montserrat", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScalaTemperatura.ForeColor = System.Drawing.Color.White;
-            this.lblScalaTemperatura.Location = new System.Drawing.Point(447, 30);
-            this.lblScalaTemperatura.Name = "lblScalaTemperatura";
-            this.lblScalaTemperatura.Size = new System.Drawing.Size(75, 58);
-            this.lblScalaTemperatura.TabIndex = 1;
-            this.lblScalaTemperatura.Text = "°C";
-            // 
             // lblValueTemperatura
             // 
             this.lblValueTemperatura.Font = new System.Drawing.Font("Montserrat", 170.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblValueTemperatura.ForeColor = System.Drawing.Color.White;
-            this.lblValueTemperatura.Location = new System.Drawing.Point(-45, -24);
+            this.lblValueTemperatura.Location = new System.Drawing.Point(557, 17);
             this.lblValueTemperatura.Name = "lblValueTemperatura";
-            this.lblValueTemperatura.Size = new System.Drawing.Size(593, 273);
+            this.lblValueTemperatura.Size = new System.Drawing.Size(182, 64);
             this.lblValueTemperatura.TabIndex = 0;
             this.lblValueTemperatura.Text = "88,8";
             // 
@@ -204,6 +194,17 @@
             this.panelB.TabIndex = 1;
             this.panelB.Paint += new System.Windows.Forms.PaintEventHandler(this.panelB_Paint);
             // 
+            // lblHtmlTemperatura
+            // 
+            this.lblHtmlTemperatura.BackColor = System.Drawing.Color.Transparent;
+            this.lblHtmlTemperatura.BaseStylesheet = null;
+            this.lblHtmlTemperatura.Location = new System.Drawing.Point(13, 2);
+            this.lblHtmlTemperatura.Name = "lblHtmlTemperatura";
+            this.lblHtmlTemperatura.Size = new System.Drawing.Size(517, 272);
+            this.lblHtmlTemperatura.TabIndex = 8;
+            this.lblHtmlTemperatura.Text = "<span style=\"color: white; font-family: Montserrat; font-size: 170pt\">88,8</span>" +
+    "<span style=\"color: white; font-family: Montserrat; font-size: 30pt\" >°C</span>";
+            // 
             // HomeGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,8 +232,7 @@
         private System.Windows.Forms.Panel panelA;
         private System.Windows.Forms.Panel panelC;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblValueTemperatura;
-        private System.Windows.Forms.Label lblScalaTemperatura;
+        private Label lblValueTemperatura;
         private System.Windows.Forms.PictureBox imgStateWeather;
         private System.Windows.Forms.Label lblTypeSystem;
         private System.Windows.Forms.PictureBox imgSystem;
@@ -242,5 +242,6 @@
         private System.Windows.Forms.Label lblHumidity;
         private System.Windows.Forms.Panel panelB;
         private System.Windows.Forms.PictureBox imgON;
+        private TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel lblHtmlTemperatura;
     }
 }

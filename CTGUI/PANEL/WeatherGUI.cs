@@ -20,7 +20,7 @@ namespace CTGUI.PANEL
 
         public WeatherGUI()
         {
-            this.DoubleBuffered = true;
+            this.DoubleBuffered = true;           
             InitializeComponent();
         }
 
@@ -66,15 +66,17 @@ namespace CTGUI.PANEL
         {
             try
             {
+                string txtTemp = "<span style=\"color: white; font-family: Montserrat; font-size: 80pt\">"+
+                    city.TEMPERATURE + "</span><span style=\"color: white; font-family: Montserrat; font-size: 20pt\" >°C</span>";
+                string txtTHumi = "<span style=\"color: white; font-family: Montserrat; font-size: 48pt\">" +
+                    city.HUMIDITY + "</span><span style=\"color: white; font-family: Montserrat; font-size: 15pt\" >%</span>";
                 lblTodayDate.Text = DateTime.Now.ToString(" dddd, d MMM", new CultureInfo("it-IT")).ToUpper();
                 if(DateTime.Now > city.SUNRISE && DateTime.Now < city.SUNSET)
                     imgStateWeatherToday.Load(city.IMG_D);
                 else
                     imgStateWeatherToday.Load(city.IMG_N);
-                lblValueTemperaturaToday.Text = city.TEMPERATURE + city.TEMPERATURE_UNIT;
-                //lblScalaTemperaturaToday.Text = city.TEMPERATURE_UNIT;
-                lblValueUmidityToday.Text = city.HUMIDITY;
-                //lblScalaTemperaturaToday.Text = "%";
+                lblHtmlTemperature.Text = txtTemp;
+                lblHtmlHumidity.Text = txtTHumi;
                 lblHIToday.Text = city.LISTA_PREVISIONI[0].HIGH + "°";
                 lblLowToday.Text = city.LISTA_PREVISIONI[0].LOW + "°";
 
