@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panelRigaBianca = new System.Windows.Forms.Panel();
             this.imageSinistraAlto = new System.Windows.Forms.PictureBox();
+            this.toggleButton1 = new CTGUI.UTILS.GUI.ToggleButtonState();
             ((System.ComponentModel.ISupportInitialize)(this.imageSinistraAlto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,6 +55,15 @@
             this.imageSinistraAlto.TabStop = false;
             this.imageSinistraAlto.Click += new System.EventHandler(this.imageSinistraAlto_Click);
             // 
+            // toggleButton1
+            // 
+            this.toggleButton1.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.toggleButton1.ForeColor = System.Drawing.Color.White;
+            this.toggleButton1.Location = new System.Drawing.Point(61, 4);
+            this.toggleButton1.Name = "toggleButton1";
+            this.toggleButton1.Size = new System.Drawing.Size(267, 80);
+            this.toggleButton1.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -61,6 +71,7 @@
             this.BackgroundImage = global::CTGUI.Properties.Resources.bg_image;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1024, 600);
+            this.Controls.Add(this.toggleButton1);
             this.Controls.Add(this.imageSinistraAlto);
             this.Controls.Add(this.panelRigaBianca);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -81,6 +92,7 @@
 
         private System.Windows.Forms.Panel panelRigaBianca;
         private System.Windows.Forms.PictureBox imageSinistraAlto;
+        private UTILS.GUI.ToggleButtonState toggleButton1;
         
 
 

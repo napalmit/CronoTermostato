@@ -7,7 +7,7 @@ namespace CTGUI.UTILS
 {
     public class StatoSistema
     {
-        public static int ON = 1;
-        public static int OFF = 2;
+        public static int AUTO = 1;
+        public static int MANUAL = 2;
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CTGUI.UTILS
+namespace CTGUI.UTILS.GUI
 {
     public class GUI
     {

@@ -11,6 +11,8 @@ using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
 using Plasmoid.Extensions;
 using YahooWeatherDLL;
+using CTGUI.UTILS;
+using CTGUI.Properties;
 namespace CTGUI.PANEL
 {
     public partial class HomeGui : UserControl
@@ -109,10 +111,35 @@ namespace CTGUI.PANEL
                 Console.WriteLine(ex.StackTrace);
             }
         }
-        public void SetStatoSystem(int statoSystem)
+        public void SetStatoCaldaia(int statoCaldaia)
         {
             try
             {
+                if (statoCaldaia == StatoCaldaia.OFF)
+                    imgStatoCaldaia.Hide();
+                else if (statoCaldaia == StatoCaldaia.ON_HEAT)
+                {
+                    imgStatoCaldaia.Show();
+                    imgStatoCaldaia.Image = Resources.fuoco_animato;
+                    imgStatoCaldaia.BringToFront();
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public void SetStatoSistema(int statoSistema)
+        {
+            try
+            {
+                if (statoSistema == StatoSistema.AUTO)
+                    lblTypeSystem.Text = "AUTO";
+                else if (statoSistema == StatoSistema.MANUAL)
+                    lblTypeSystem.Text = "MANUAL";
             }
             catch (Exception ex)
             {
@@ -135,17 +162,6 @@ namespace CTGUI.PANEL
                 cp.ExStyle = cp.ExStyle | 0x2000000;
                 return cp;
             }
-        }
-
-        internal void AttivaSistema()
-        {
-            imgON.Show();
-            imgON.BringToFront();
-        }
-
-        internal void DisattivaSistema()
-        {
-            imgON.Hide();
         }
     }
 }

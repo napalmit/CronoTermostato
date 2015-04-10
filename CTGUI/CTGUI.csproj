@@ -105,7 +105,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UTILS\GraphicsExtension.cs" />
-    <Compile Include="UTILS\GUI.cs" />
+    <Compile Include="UTILS\GUI\GUI.cs" />
+    <Compile Include="UTILS\GUI\ToggleButtonState.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UTILS\GUI\ToggleButtonState.Designer.cs">
+      <DependentUpon>ToggleButtonState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UTILS\StatoCaldaia.cs" />
     <Compile Include="UTILS\StatoSistema.cs" />
     <Compile Include="UTILS\StatoVisualizzazione.cs" />
     <EmbeddedResource Include="MainForm.resx">

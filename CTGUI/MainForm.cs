@@ -1,6 +1,7 @@
 ﻿using CTGUI.PANEL;
 using CTGUI.Properties;
 using CTGUI.UTILS;
+using CTGUI.UTILS.GUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace CTGUI
         public DateTime DATA_SISTEMA { get; set; }
         public YahooWeatherCity WEATHER { get; set; }
         public int STATO_SISTEMA { get; set; }
+        public int STATO_CALDAIA { get; set; }
         //public delegate
         public delegate void DelegateSimple();
         public delegate void DelegateString(string one);
@@ -78,11 +80,15 @@ namespace CTGUI
                 ShowPANEL_MENU_SINISTRA();
                 ShowPANEL_MUOVI_MENU();               
                 ShowPANEL_HOME_GUI();
-                SetStatoSistema(StatoSistema.ON);
                 imageSinistraAlto.Hide();
                 
                 //setto le variabili e altro
                 STATO_VISUALIZZAZIONE = StatoVisualizzazione.HOME;
+                STATO_SISTEMA = StatoSistema.AUTO;
+                toggleButton1.SetStatoSistema(STATO_SISTEMA);
+                toggleButton1.ToggleClick +=toggleButton1_ToggleClick;
+                STATO_CALDAIA = StatoCaldaia.ON_COLD;
+                PANEL_HOME_GUI.SetStatoCaldaia(STATO_CALDAIA);
                 
             }
             catch(Exception ex)
@@ -90,6 +96,13 @@ namespace CTGUI
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
+        }
+
+        private void toggleButton1_ToggleClick(object sender, ToggleButtonState.ToggleEventArgs e)
+        {
+            Console.WriteLine(e.Stato);
+            STATO_SISTEMA = e.Stato;
+            PANEL_HOME_GUI.SetStatoSistema(STATO_SISTEMA);
         }
 
         private void TIMER_TEMPERATURA_Elapsed(object sender, ElapsedEventArgs e)
@@ -339,26 +352,6 @@ namespace CTGUI
         }
 
         //metodi di stato
-        public void SetStatoSistema(int statoSistema)
-        {
-            try
-            {
-                if (statoSistema == StatoSistema.ON)
-                {                   
-                    PANEL_HOME_GUI.AttivaSistema();
-                }
-                else if (statoSistema == StatoSistema.OFF)
-                {
-                    PANEL_HOME_GUI.DisattivaSistema();
-                }
-
-                STATO_SISTEMA = statoSistema;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
+        
     }
 }

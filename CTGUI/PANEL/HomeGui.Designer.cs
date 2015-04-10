@@ -31,7 +31,8 @@ namespace CTGUI.PANEL
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeGui));
             this.panelA = new System.Windows.Forms.Panel();
-            this.imgON = new System.Windows.Forms.PictureBox();
+            this.lblHtmlTemperatura = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
+            this.imgStatoCaldaia = new System.Windows.Forms.PictureBox();
             this.imgStateWeather = new System.Windows.Forms.PictureBox();
             this.lblValueTemperatura = new System.Windows.Forms.Label();
             this.panelC = new System.Windows.Forms.Panel();
@@ -43,9 +44,8 @@ namespace CTGUI.PANEL
             this.lblScalaHumidity = new System.Windows.Forms.Label();
             this.lblHumidity = new System.Windows.Forms.Label();
             this.panelB = new System.Windows.Forms.Panel();
-            this.lblHtmlTemperatura = new TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel();
             this.panelA.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgON)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgStatoCaldaia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStateWeather)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSystem)).BeginInit();
             this.panelB.SuspendLayout();
@@ -55,7 +55,7 @@ namespace CTGUI.PANEL
             // 
             this.panelA.BackColor = System.Drawing.Color.Transparent;
             this.panelA.Controls.Add(this.lblHtmlTemperatura);
-            this.panelA.Controls.Add(this.imgON);
+            this.panelA.Controls.Add(this.imgStatoCaldaia);
             this.panelA.Controls.Add(this.imgStateWeather);
             this.panelA.Controls.Add(this.lblValueTemperatura);
             this.panelA.Location = new System.Drawing.Point(0, 35);
@@ -64,16 +64,27 @@ namespace CTGUI.PANEL
             this.panelA.TabIndex = 0;
             this.panelA.Paint += new System.Windows.Forms.PaintEventHandler(this.panelA_Paint);
             // 
-            // imgON
+            // lblHtmlTemperatura
             // 
-            this.imgON.BackColor = System.Drawing.Color.Transparent;
-            this.imgON.Image = global::CTGUI.Properties.Resources.fuoco_animato;
-            this.imgON.Location = new System.Drawing.Point(571, 125);
-            this.imgON.Name = "imgON";
-            this.imgON.Size = new System.Drawing.Size(110, 155);
-            this.imgON.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgON.TabIndex = 7;
-            this.imgON.TabStop = false;
+            this.lblHtmlTemperatura.BackColor = System.Drawing.Color.Transparent;
+            this.lblHtmlTemperatura.BaseStylesheet = null;
+            this.lblHtmlTemperatura.Location = new System.Drawing.Point(13, 2);
+            this.lblHtmlTemperatura.Name = "lblHtmlTemperatura";
+            this.lblHtmlTemperatura.Size = new System.Drawing.Size(517, 272);
+            this.lblHtmlTemperatura.TabIndex = 8;
+            this.lblHtmlTemperatura.Text = "<span style=\"color: white; font-family: Montserrat; font-size: 170pt\">88,8</span>" +
+    "<span style=\"color: white; font-family: Montserrat; font-size: 30pt\" >°C</span>";
+            // 
+            // imgStatoCaldaia
+            // 
+            this.imgStatoCaldaia.BackColor = System.Drawing.Color.Transparent;
+            this.imgStatoCaldaia.Image = global::CTGUI.Properties.Resources.fuoco_animato;
+            this.imgStatoCaldaia.Location = new System.Drawing.Point(571, 125);
+            this.imgStatoCaldaia.Name = "imgStatoCaldaia";
+            this.imgStatoCaldaia.Size = new System.Drawing.Size(110, 155);
+            this.imgStatoCaldaia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgStatoCaldaia.TabIndex = 7;
+            this.imgStatoCaldaia.TabStop = false;
             // 
             // imgStateWeather
             // 
@@ -119,12 +130,11 @@ namespace CTGUI.PANEL
             // 
             this.lblTypeSystem.Font = new System.Drawing.Font("Roboto", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTypeSystem.ForeColor = System.Drawing.Color.White;
-            this.lblTypeSystem.Location = new System.Drawing.Point(208, 25);
+            this.lblTypeSystem.Location = new System.Drawing.Point(214, 25);
             this.lblTypeSystem.Name = "lblTypeSystem";
             this.lblTypeSystem.Size = new System.Drawing.Size(145, 33);
             this.lblTypeSystem.TabIndex = 4;
             this.lblTypeSystem.Text = "MANUAL";
-            this.lblTypeSystem.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // imgSystem
             // 
@@ -182,10 +192,10 @@ namespace CTGUI.PANEL
             // panelB
             // 
             this.panelB.BackColor = System.Drawing.Color.Transparent;
+            this.panelB.Controls.Add(this.lblTypeSystem);
             this.panelB.Controls.Add(this.lblScalaHumidity);
             this.panelB.Controls.Add(this.lblSystem);
             this.panelB.Controls.Add(this.imgSystem);
-            this.panelB.Controls.Add(this.lblTypeSystem);
             this.panelB.Controls.Add(this.lblValueUmidity);
             this.panelB.Controls.Add(this.lblHumidity);
             this.panelB.Location = new System.Drawing.Point(79, 321);
@@ -193,17 +203,6 @@ namespace CTGUI.PANEL
             this.panelB.Size = new System.Drawing.Size(671, 81);
             this.panelB.TabIndex = 1;
             this.panelB.Paint += new System.Windows.Forms.PaintEventHandler(this.panelB_Paint);
-            // 
-            // lblHtmlTemperatura
-            // 
-            this.lblHtmlTemperatura.BackColor = System.Drawing.Color.Transparent;
-            this.lblHtmlTemperatura.BaseStylesheet = null;
-            this.lblHtmlTemperatura.Location = new System.Drawing.Point(13, 2);
-            this.lblHtmlTemperatura.Name = "lblHtmlTemperatura";
-            this.lblHtmlTemperatura.Size = new System.Drawing.Size(517, 272);
-            this.lblHtmlTemperatura.TabIndex = 8;
-            this.lblHtmlTemperatura.Text = "<span style=\"color: white; font-family: Montserrat; font-size: 170pt\">88,8</span>" +
-    "<span style=\"color: white; font-family: Montserrat; font-size: 30pt\" >°C</span>";
             // 
             // HomeGui
             // 
@@ -218,7 +217,7 @@ namespace CTGUI.PANEL
             this.Size = new System.Drawing.Size(752, 520);
             this.panelA.ResumeLayout(false);
             this.panelA.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgON)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgStatoCaldaia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgStateWeather)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgSystem)).EndInit();
             this.panelB.ResumeLayout(false);
@@ -241,7 +240,7 @@ namespace CTGUI.PANEL
         private System.Windows.Forms.Label lblScalaHumidity;
         private System.Windows.Forms.Label lblHumidity;
         private System.Windows.Forms.Panel panelB;
-        private System.Windows.Forms.PictureBox imgON;
+        private System.Windows.Forms.PictureBox imgStatoCaldaia;
         private TheArtOfDev.HtmlRenderer.WinForms.HtmlLabel lblHtmlTemperatura;
     }
 }
