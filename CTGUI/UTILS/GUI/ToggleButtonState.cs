@@ -100,22 +100,22 @@ namespace CTGUI.UTILS.GUI
 
         protected void AutoState()
         {
-            _button1.BackColor = Color.Gray;
+            _button1.BackColor = Color.LimeGreen;
             _button1.Text = "AUTO";
             _button1.Enabled = false;
 
-            _button2.BackColor = Color.LimeGreen;
+            _button2.BackColor = Color.Red;
             _button2.Text = "MANUAL";
             _button2.Enabled = true;
         }
 
         protected void ManualState()
         {
-            _button1.BackColor = Color.LimeGreen;
+            _button1.BackColor = Color.Red;
             _button1.Text = "AUTO";
             _button1.Enabled = true;
 
-            _button2.BackColor = Color.Gray;
+            _button2.BackColor = Color.LimeGreen;
             _button2.Text = "MANUAL";
             _button2.Enabled = false;
         }
