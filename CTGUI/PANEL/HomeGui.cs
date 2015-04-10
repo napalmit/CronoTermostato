@@ -18,6 +18,8 @@ namespace CTGUI.PANEL
     public partial class HomeGui : UserControl
     {
         public MainForm MAINFORM { get; set; }
+        public event Action ClickSistema;
+        public event Action ClickImgWeather;
         public HomeGui()
         {
             this.DoubleBuffered = true;
@@ -151,7 +153,7 @@ namespace CTGUI.PANEL
 
         private void imgStateWeather_Click(object sender, EventArgs e)
         {
-            MAINFORM.ClickHomeGuiWeather();            
+            ClickImgWeather.Invoke();
         }
 
         protected override CreateParams CreateParams
@@ -162,6 +164,11 @@ namespace CTGUI.PANEL
                 cp.ExStyle = cp.ExStyle | 0x2000000;
                 return cp;
             }
+        }
+
+        private void imgSystem_Click(object sender, EventArgs e)
+        {
+            ClickSistema.Invoke();
         }
     }
 }

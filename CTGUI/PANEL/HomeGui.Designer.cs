@@ -145,6 +145,7 @@ namespace CTGUI.PANEL
             this.imgSystem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgSystem.TabIndex = 2;
             this.imgSystem.TabStop = false;
+            this.imgSystem.Click += new System.EventHandler(this.imgSystem_Click);
             // 
             // lblValueUmidity
             // 

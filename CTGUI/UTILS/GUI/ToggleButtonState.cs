@@ -20,7 +20,7 @@ namespace CTGUI.UTILS.GUI
 
         public ToggleButtonState()
         {
-            this.Font = new Font("Roboto", 15);
+            this.Font = new Font("Roboto", 35);
 
             _button1 = new Label();
             _button1.Font = this.Font;

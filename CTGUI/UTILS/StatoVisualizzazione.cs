@@ -9,5 +9,7 @@ namespace CTGUI.UTILS
     {
         public static int HOME = 1;
         public static int WEATHER = 2;
+
+        public static int SYSTEM = 3;
     }
 }

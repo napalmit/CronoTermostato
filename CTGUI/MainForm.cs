@@ -1,4 +1,5 @@
-﻿using CTGUI.PANEL;
+﻿using CTGUI.LOGICA;
+using CTGUI.PANEL;
 using CTGUI.Properties;
 using CTGUI.UTILS;
 using CTGUI.UTILS.GUI;
@@ -26,23 +27,28 @@ namespace CTGUI
         public DateTime DATA_ULTIMA_OPERAZIONE { get; set; }
         public DateTime DATA_SISTEMA { get; set; }
         public YahooWeatherCity WEATHER { get; set; }
-        public int STATO_SISTEMA { get; set; }
-        public int STATO_CALDAIA { get; set; }
+        
+
         //public delegate
         public delegate void DelegateSimple();
         public delegate void DelegateString(string one);
         public delegate void DelegateYahooWeatherCity(YahooWeatherCity one);
         public delegate void DelegateTwoString(string one, string two);
 
-        //private
+        //private UserControl
         private Time PANEL_TIME;
         private MenuSinistra PANEL_MENU_SINISTRA;
         private MuoviMenu PANEL_MUOVI_MENU;
         private HomeGui PANEL_HOME_GUI;
         private WeatherGUI PANEL_WEATHER_GUI;
+        private SystemStateGUI PANEL_SYSTEM_STATE_GUI;
+
+        //private
         private int STATO_VISUALIZZAZIONE;
+        private LogicaSistema LOGICA_SISTEMA;
+
+        //private time
         private System.Timers.Timer TIMER_WEATHER;
-        private System.Timers.Timer TIMER_TEMPERATURA;
 
         public MainForm()
         {
@@ -55,21 +61,20 @@ namespace CTGUI
         {
             try
             {
+                // logica sistema
+                LOGICA_SISTEMA = new LogicaSistema();
+                LOGICA_SISTEMA.CambioTemperatura += LOGICA_SISTEMA_CambioTemperatura;
+
                 // istanzio i vari pannelli
                 InitPanel();
 
                 // creo l'oggetto per le previsioni
                 InitWeather();
 
-                //creo e starto i timer
-                #region TIMER
-                TIMER_TEMPERATURA = new System.Timers.Timer(1000); // aggiorno la temperatura ogni secondo
-                TIMER_TEMPERATURA.Elapsed += new ElapsedEventHandler(TIMER_TEMPERATURA_Elapsed);
-                TIMER_TEMPERATURA.Enabled = true;
+                //timer
                 TIMER_WEATHER = new System.Timers.Timer(300000); // aggiorno il tempo ogni 300 secondi
                 TIMER_WEATHER.Elapsed += new ElapsedEventHandler(TIMER_WEATHER_Elapsed);
                 TIMER_WEATHER.Enabled = true;
-                #endregion
 
                 //preparo i dati da fare vedere nei pannelli
                 Init_HOME_GUI();
@@ -84,37 +89,16 @@ namespace CTGUI
                 
                 //setto le variabili e altro
                 STATO_VISUALIZZAZIONE = StatoVisualizzazione.HOME;
-                STATO_SISTEMA = StatoSistema.AUTO;
-                toggleButton1.SetStatoSistema(STATO_SISTEMA);
-                toggleButton1.ToggleClick +=toggleButton1_ToggleClick;
-                STATO_CALDAIA = StatoCaldaia.ON_COLD;
-                PANEL_HOME_GUI.SetStatoCaldaia(STATO_CALDAIA);
+                LOGICA_SISTEMA.STATO_SISTEMA = StatoSistema.AUTO;
+                LOGICA_SISTEMA.STATO_CALDAIA = StatoCaldaia.ON_COLD;
+                PANEL_HOME_GUI.SetStatoCaldaia(LOGICA_SISTEMA.STATO_CALDAIA);
+                PANEL_HOME_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
+                PANEL_SYSTEM_STATE_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
+
+                
                 
             }
             catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-
-        private void toggleButton1_ToggleClick(object sender, ToggleButtonState.ToggleEventArgs e)
-        {
-            Console.WriteLine(e.Stato);
-            STATO_SISTEMA = e.Stato;
-            PANEL_HOME_GUI.SetStatoSistema(STATO_SISTEMA);
-        }
-
-        private void TIMER_TEMPERATURA_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            try
-            {
-                //aggiorno la temperatura
-                int test1 = new Random().Next(18, 20);
-                int test2 = new Random().Next(0, 9);
-                this.Invoke(new DelegateTwoString(PANEL_HOME_GUI.SetTemperatura), test1 + "," + test2, "°C");
-            }
-            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
@@ -125,22 +109,24 @@ namespace CTGUI
         {
             try
             {
-                Console.WriteLine("AGGIORNO TEMPO");
                 InitWeather();
-                Console.WriteLine("AGGIORNO PANEL_WEATHER_GUI");
                 this.Invoke(new DelegateYahooWeatherCity(PANEL_WEATHER_GUI.SettingGUI), WEATHER);
-                Console.WriteLine("AGGIORNO IMMAGINE TEMPO HOME_GUI");
                 if ((DateTime.Now > WEATHER.SUNRISE) && (DateTime.Now < WEATHER.SUNSET))
                     this.Invoke(new DelegateString(PANEL_HOME_GUI.SetWeatherImage), WEATHER.IMG_D);
                 else
                     this.Invoke(new DelegateString(PANEL_HOME_GUI.SetWeatherImage), WEATHER.IMG_N);
-                
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
+        }
+
+        private void LOGICA_SISTEMA_CambioTemperatura(object sender, LogicaSistema.CambioTemperaturaArgs e)
+        {
+            this.Invoke(new DelegateTwoString(PANEL_HOME_GUI.SetTemperatura), e.Temperatura.ToString("n1"), "°C");
         }
 
         private void Init_HOME_GUI()
@@ -200,6 +186,8 @@ namespace CTGUI
                 PANEL_HOME_GUI.MAINFORM = this;
                 PANEL_HOME_GUI.Location = new Point(175, 93);
                 this.Controls.Add(PANEL_HOME_GUI);
+                PANEL_HOME_GUI.ClickSistema += PANEL_HOME_GUI_ClickSistema;
+                PANEL_HOME_GUI.ClickImgWeather += PANEL_HOME_GUI_ClickImgWeather;
                 PANEL_HOME_GUI.Hide();
 
                 PANEL_WEATHER_GUI = new WeatherGUI();
@@ -207,6 +195,38 @@ namespace CTGUI
                 PANEL_WEATHER_GUI.Location = new Point(175, 93);
                 this.Controls.Add(PANEL_WEATHER_GUI);
                 PANEL_WEATHER_GUI.Hide();
+
+                PANEL_SYSTEM_STATE_GUI = new SystemStateGUI();
+                PANEL_SYSTEM_STATE_GUI.MAINFORM = this;
+                PANEL_SYSTEM_STATE_GUI.Location = new Point(175, 93);
+                this.Controls.Add(PANEL_SYSTEM_STATE_GUI);
+                PANEL_SYSTEM_STATE_GUI.CambioStatoSistema += PANEL_SYSTEM_STATE_GUI_CambioStatoSistema;
+                PANEL_SYSTEM_STATE_GUI.Hide();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private void PANEL_HOME_GUI_ClickImgWeather()
+        {
+            ApriPannelloWeatherGUI();
+        }
+
+        private void PANEL_HOME_GUI_ClickSistema()
+        {
+            ApriPannelloSistemaGUI();
+        }
+
+        private void PANEL_SYSTEM_STATE_GUI_CambioStatoSistema(object sender, SystemStateGUI.CambioStatoSistemaArgs e)
+        {
+            try
+            {
+                LOGICA_SISTEMA.STATO_SISTEMA = e.Stato;
+                PANEL_HOME_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
+                ChiudiPannelloSistemaGUI();
             }
             catch (Exception ex)
             {
@@ -222,13 +242,11 @@ namespace CTGUI
                 DATA_ULTIMA_OPERAZIONE = DateTime.Now;
                 if (STATO_VISUALIZZAZIONE == StatoVisualizzazione.WEATHER)
                 {
-                    // show imageSinistraAlto
-                    GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
-                    //show homeGui
-                    GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
-                    //hide weather gui
-                    GUI.Animate(PANEL_WEATHER_GUI, GUI.Effect.Slide, 200, 45);
-                    STATO_VISUALIZZAZIONE = StatoVisualizzazione.HOME;
+                    ChiudiPannelloWeatherGUI();
+                }
+                else if (STATO_VISUALIZZAZIONE == StatoVisualizzazione.SYSTEM)
+                {
+                    ChiudiPannelloSistemaGUI();
                 }
 
             }
@@ -330,7 +348,7 @@ namespace CTGUI
             PANEL_MUOVI_MENU.BringToFront();
         }
 
-        public void ClickHomeGuiWeather()
+        public void ApriPannelloWeatherGUI()
         {
             try
             {
@@ -343,6 +361,67 @@ namespace CTGUI
                 GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
                 //Show weather gui
                 GUI.Animate(PANEL_WEATHER_GUI, GUI.Effect.Slide, 200, 45);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public void ChiudiPannelloWeatherGUI()
+        {
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                // show imageSinistraAlto
+                GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
+                //show homeGui
+                GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+                //hide weather gui
+                GUI.Animate(PANEL_WEATHER_GUI, GUI.Effect.Slide, 200, 45);
+                STATO_VISUALIZZAZIONE = StatoVisualizzazione.HOME;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public void ApriPannelloSistemaGUI()
+        {
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                STATO_VISUALIZZAZIONE = StatoVisualizzazione.SYSTEM;
+                imageSinistraAlto.Image = Resources.home;
+                // show imageSinistraAlto
+                GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
+                //hide homeGui
+                GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+                //Show system gui gui
+                GUI.Animate(PANEL_SYSTEM_STATE_GUI, GUI.Effect.Slide, 200, 45);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        public void ChiudiPannelloSistemaGUI()
+        {
+            try
+            {
+                DATA_ULTIMA_OPERAZIONE = DateTime.Now;
+                // show imageSinistraAlto
+                GUI.Animate(imageSinistraAlto, GUI.Effect.Slide, 300, 0);
+                //show homeGui
+                GUI.Animate(PANEL_HOME_GUI, GUI.Effect.Slide, 200, 135);
+                //hide weather gui
+                GUI.Animate(PANEL_SYSTEM_STATE_GUI, GUI.Effect.Slide, 200, 45);
+                STATO_VISUALIZZAZIONE = StatoVisualizzazione.HOME;
             }
             catch (Exception ex)
             {

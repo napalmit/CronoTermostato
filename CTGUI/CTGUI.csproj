@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LOGICA\LogicaSistema.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +72,12 @@
     </Compile>
     <Compile Include="PANEL\ColumnWeather.Designer.cs">
       <DependentUpon>ColumnWeather.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PANEL\SystemStateGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PANEL\SystemStateGUI.Designer.cs">
+      <DependentUpon>SystemStateGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="PANEL\HomeGui.cs">
       <SubType>UserControl</SubType>
@@ -120,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PANEL\ColumnWeather.resx">
       <DependentUpon>ColumnWeather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PANEL\SystemStateGUI.resx">
+      <DependentUpon>SystemStateGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PANEL\HomeGui.resx">
       <DependentUpon>HomeGui.cs</DependentUpon>
