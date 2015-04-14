@@ -8,7 +8,7 @@
     <description>Yahoo! Weather for Cuorgne, IT</description>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Apr 2015 5:54 pm CEST</lastBuildDate>
-    <ttl>60</ttl>
+    <ttl>60</ttl> 
     <yweather:location city="Cuorgne" region="PM" country="Italy"/>
     <yweather:units temperature="C" distance="km" pressure="mb" speed="km/h"/>
     <yweather:wind chill="9" direction="0" speed="0"/>
