@@ -1,0 +1,1 @@
+-- INSERT INTO tbl_registrazioni_temperatura (id, data_registrazione, valore) VALUES (null, datetime('now'), 18.3);

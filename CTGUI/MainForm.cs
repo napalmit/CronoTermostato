@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
@@ -95,10 +96,30 @@ namespace CTGUI
                 PANEL_HOME_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
                 PANEL_SYSTEM_STATE_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
 
-                
+                TestDb();
                 
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private void TestDb()
+        {
+            try
+            {
+                SQLiteConnection cnn = new SQLiteConnection("DbLinqProvider=Sqlite;Data Source=../../../DB/CTDB.db3");
+                cnn.Open();
+
+                Main db = new Main(cnn);
+
+                var q2 = from p in db.TBlRegisTRaZionITemperaTURa orderby p.ID select p;
+                foreach (var v in q2)
+                    Console.WriteLine(v.ID +"|"+v.DataRegisTRaZionE+"|"+v.ValorE);
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
