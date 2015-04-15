@@ -20,14 +20,14 @@ namespace CTGUI.UTILS.GUI
 
         public ToggleButtonState()
         {
-            this.Font = new Font("Roboto", 35);
+            this.Font = new Font("Roboto", 30);
 
             _button1 = new Label();
             _button1.Font = this.Font;
             _button1.Text = "AUTO";
             _button1.BackColor = Color.LimeGreen;
-            _button1.Height = this.Height;
-            _button1.Width = this.Width / 2;
+            _button1.Height = this.Height / 2;
+            _button1.Width = this.Width;
             _button1.TextAlign = ContentAlignment.MiddleCenter;
             _button1.Click += new EventHandler(_button_Click);
             _button1.Tag = "AUTO";
@@ -37,9 +37,9 @@ namespace CTGUI.UTILS.GUI
             _button2.Font = this.Font;
             _button2.Text = "MANUAL";
             _button2.BackColor = Color.Gray;
-            _button2.Left = _button1.Width;
-            _button2.Height = this.Height;
-            _button2.Width = this.Width / 2;
+            _button2.Top = _button1.Height;
+            _button2.Height = this.Height / 2;
+            _button2.Width = this.Width;
             _button2.TextAlign = ContentAlignment.MiddleCenter;
             _button2.Click += new EventHandler(_button_Click);
             _button2.Tag = "MANUAL";
@@ -123,12 +123,12 @@ namespace CTGUI.UTILS.GUI
         protected override void OnResize(EventArgs eventargs)
         {
             base.OnResize(eventargs);
-            _button1.Height = this.Height;
-            _button1.Width = this.Width / 2;
+            _button1.Height = this.Height / 2;
+            _button1.Width = this.Width;
 
-            _button2.Height = this.Height;
-            _button2.Width = this.Width / 2;
-            _button2.Left = _button1.Width;
+            _button2.Height = this.Height / 2;
+            _button2.Width = this.Width;
+            _button2.Top = _button1.Height;
         }
 
         public class ToggleEventArgs : EventArgs
