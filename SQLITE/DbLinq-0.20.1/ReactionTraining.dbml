@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="main" Class="Main" BaseType="DbLinq.Data.Linq.DataContext" Provider="Sqlite" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="main.tbl_job" Member="TBlJob">
+    <Type Name="TBlJob">
+      <Column Name="data" Member="Data" Storage="_data" Type="System.DateTime" DbType="DATE" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="durata" Member="DURatA" Storage="_durAtA" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="intervallo_massimo" Member="InTeRvAllOMasSimO" Storage="_inTeRvAllOmAsSimO" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="intervallo_minimo" Member="InTeRvAllOMinimO" Storage="_inTeRvAllOmInimO" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="numero_sensori" Member="NumEROSensorI" Storage="_numErosEnsorI" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.tbl_job_detail" Member="TBlJobDetail">
+    <Type Name="TBlJobDetail">
+      <Column Name="data_attivazione" Member="DataAtTIVAzIonE" Storage="_dataAtTivaZIonE" Type="System.DateTime" DbType="DATE" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="data_disattivazione" Member="DataDiSatTIVAzIonE" Storage="_dataDiSatTivaZIonE" Type="System.DateTime" DbType="DATE" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_job" Member="IDJob" Storage="_idjOb" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="sensore" Member="SensorE" Storage="_sensorE" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

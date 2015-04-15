@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="main" Class="Main" BaseType="DbLinq.Data.Linq.DataContext" Provider="Sqlite" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="main.rel_operators_customers" Member="ReLOperatorsCustomers">
+    <Type Name="ReLOperatorsCustomers">
+      <Association Name="fk_tbl_users_3" Member="TBlUsers" Storage="_tbLUsers" Type="TBlUsers" ThisKey="IDOperator" OtherKey="ID" DeleteRule="NO ACTION" />
+      <Column Name="id_customer" Member="IDCustomer" Storage="_idcUstomer" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id_operator" Member="IDOperator" Storage="_idoPerator" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.rel_operators_stringers" Member="ReLOperatorsStringers">
+    <Type Name="ReLOperatorsStringers">
+      <Column Name="id_operator" Member="IDOperator" Storage="_idoPerator" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="true" />
+      <Column Name="id_stringer" Member="IDStringer" Storage="_idsTringer" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="main.tbl_brands" Member="TBlBrands">
+    <Type Name="TBlBrands">
+      <Column Name="date_mod" Member="DateMod" Storage="_dateMod" Type="System.DateTime" DbType="datetime" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="description" Member="Description" Storage="_description" Type="System.String" DbType="text" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="int" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_user_mod" Member="IDUserMod" Storage="_iduSerMod" Type="System.Int32" DbType="int" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="name" Member="Name" Storage="_name" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.tbl_cc" Member="TBlCc">
+    <Type Name="TBlCc">
+      <Association Name="fk_tbl_users_0" Member="TBlUsers" Storage="_tbLUsers" Type="TBlUsers" ThisKey="ID" OtherKey="IDCcType" DeleteRule="NO ACTION" />
+      <Column Name="description" Member="Description" Storage="_description" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="integer" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.tbl_payment" Member="TBlPayment">
+    <Type Name="TBlPayment">
+      <Association Name="fk_tbl_users_1" Member="TBlUsers" Storage="_tbLUsers" Type="TBlUsers" ThisKey="ID" OtherKey="IDPayment" DeleteRule="NO ACTION" />
+      <Column Name="description" Member="Description" Storage="_description" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="int" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="language" Member="Language" Storage="_language" Type="System.String" DbType="char(5)" IsPrimaryKey="true" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.tbl_roles" Member="TBlRoles">
+    <Type Name="TBlRoles">
+      <Association Name="fk_tbl_users_2" Member="TBlUsers" Storage="_tbLUsers" Type="TBlUsers" ThisKey="ID" OtherKey="IDRole" DeleteRule="NO ACTION" />
+      <Column Name="description" Member="Description" Storage="_description" Type="System.String" DbType="VARCHAR(20)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.tbl_users" Member="TBlUsers">
+    <Type Name="TBlUsers">
+      <Association Name="fk_tbl_users_0" Member="TBlCc" Storage="_tbLCc" Type="TBlCc" ThisKey="IDCcType" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="fk_tbl_users_1" Member="TBlPayment" Storage="_tbLPayment" Type="TBlPayment" ThisKey="IDPayment" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="fk_tbl_users_2" Member="TBlRoles" Storage="_tbLRoles" Type="TBlRoles" ThisKey="IDRole" OtherKey="ID" IsForeignKey="true" />
+      <Association Name="fk_tbl_users_3" Member="ReLOperatorsCustomers" Storage="_reLoPeratorsCustomers" Type="ReLOperatorsCustomers" ThisKey="ID" OtherKey="IDOperator" IsForeignKey="true" />
+      <Column Name="account_data" Member="AccountData" Storage="_accountData" Type="System.String" DbType="text" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="active" Member="Active" Storage="_active" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="address_1" Member="Address1" Storage="_address1" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="cap_1" Member="Cap1" Storage="_cap1" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="cc_ccv" Member="CcCcV" Storage="_ccCcV" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="cc_month" Member="CcMonth" Storage="_ccMonth" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="cc_name" Member="CcName" Storage="_ccName" Type="System.String" DbType="nvarchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="cc_number" Member="CcNumber" Storage="_ccNumber" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="cc_year" Member="CcYear" Storage="_ccYear" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="city_1" Member="City1" Storage="_city1" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="date_mod" Member="DateMod" Storage="_dateMod" Type="System.DateTime" DbType="timestamp" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="email" Member="Email" Storage="_email" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="integer" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_cc_type" Member="IDCcType" Storage="_idcCType" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="id_payment" Member="IDPayment" Storage="_idpAyment" Type="System.Int32" DbType="int" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="id_role" Member="IDRole" Storage="_idrOle" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="id_user_mod" Member="IDUserMod" Storage="_iduSerMod" Type="System.Int32" DbType="integer" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="name" Member="Name" Storage="_name" Type="System.String" DbType="varchar(25)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="password" Member="Password" Storage="_password" Type="System.String" DbType="varchar(15)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="province_1" Member="Province1" Storage="_province1" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="state_1" Member="State1" Storage="_state1" Type="System.String" DbType="varchar(50)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="surname" Member="Surname" Storage="_surname" Type="System.String" DbType="varchar(25)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="telephone_1" Member="Telephone1" Storage="_telephone1" Type="System.String" DbType="varchar(20)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="telephone_2" Member="Telephone2" Storage="_telephone2" Type="System.String" DbType="varchar(20)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="username" Member="UserName" Storage="_userName" Type="System.String" DbType="varchar(15)" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
