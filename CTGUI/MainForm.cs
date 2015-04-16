@@ -46,7 +46,9 @@ namespace CTGUI
 
         //private
         private int STATO_VISUALIZZAZIONE;
+        private LetturaTemperatura LETTURA_TEMPERATURA;
         private LogicaSistema LOGICA_SISTEMA;
+        private Main DB;
 
         //private time
         private System.Timers.Timer TIMER_WEATHER;
@@ -62,15 +64,22 @@ namespace CTGUI
         {
             try
             {
-                // logica sistema
+                // LetturaTemperatura
                 LOGICA_SISTEMA = new LogicaSistema();
-                LOGICA_SISTEMA.CambioTemperatura += LOGICA_SISTEMA_CambioTemperatura;
+                LOGICA_SISTEMA.CambioStatoCaldaia +=LOGICA_SISTEMA_CambioStatoCaldaia;
+
+                // LetturaTemperatura
+                LETTURA_TEMPERATURA = new LetturaTemperatura();
+                LETTURA_TEMPERATURA.CambioTemperatura += LETTURA_TEMPERATURA_CambioTemperatura;
 
                 // istanzio i vari pannelli
                 InitPanel();
 
                 // creo l'oggetto per le previsioni
                 InitWeather();
+
+                //attivo il db
+                InitDB();
 
                 //timer
                 TIMER_WEATHER = new System.Timers.Timer(300000); // aggiorno il tempo ogni 300 secondi
@@ -91,12 +100,12 @@ namespace CTGUI
                 //setto le variabili e altro
                 STATO_VISUALIZZAZIONE = StatoVisualizzazione.HOME;
                 LOGICA_SISTEMA.STATO_SISTEMA = StatoSistema.AUTO;
-                LOGICA_SISTEMA.STATO_CALDAIA = StatoCaldaia.ON_COLD;
-                PANEL_HOME_GUI.SetStatoCaldaia(LOGICA_SISTEMA.STATO_CALDAIA);
+                LOGICA_SISTEMA.__STATO_CALDAIA = StatoCaldaia.OFF;
+                PANEL_HOME_GUI.SetStatoCaldaia(LOGICA_SISTEMA.__STATO_CALDAIA);
                 PANEL_HOME_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
                 PANEL_SYSTEM_STATE_GUI.SetStatoSistema(LOGICA_SISTEMA.STATO_SISTEMA);
 
-                TestDb();
+                
                 
             }
             catch(Exception ex)
@@ -105,19 +114,19 @@ namespace CTGUI
                 Console.WriteLine(ex.StackTrace);
             }
         }
-
-        private void TestDb()
+     
+        private void InitDB()
         {
             try
             {
                 SQLiteConnection cnn = new SQLiteConnection("DbLinqProvider=Sqlite;Data Source=../../../DB/CTDB.db3");
                 cnn.Open();
 
-                Main db = new Main(cnn);
+                DB = new Main(cnn);
 
-                var q2 = from p in db.TBlRegisTRaZionITemperaTURa orderby p.ID select p;
-                foreach (var v in q2)
-                    Console.WriteLine(v.ID +"|"+v.DataRegisTRaZionE+"|"+v.ValorE);
+                //var q2 = from p in db.TBlRegisTRaZionITemperaTURa orderby p.ID select p;
+                //foreach (var v in q2)
+                //    Console.WriteLine(v.ID +"|"+v.DataRegisTRaZionE+"|"+v.ValorE);
             }
             catch (Exception ex)
             {
@@ -145,11 +154,7 @@ namespace CTGUI
             }
         }
 
-        private void LOGICA_SISTEMA_CambioTemperatura(object sender, LogicaSistema.CambioTemperaturaArgs e)
-        {
-            this.Invoke(new DelegateTwoString(PANEL_HOME_GUI.SetTemperatura), e.Temperatura.ToString("n1"), "°C");
-        }
-
+        #region metodo per GUI iniziale
         private void Init_HOME_GUI()
         {
             try
@@ -222,6 +227,7 @@ namespace CTGUI
                 PANEL_SYSTEM_STATE_GUI.Location = new Point(175, 93);
                 this.Controls.Add(PANEL_SYSTEM_STATE_GUI);
                 PANEL_SYSTEM_STATE_GUI.CambioStatoSistema += PANEL_SYSTEM_STATE_GUI_CambioStatoSistema;
+                PANEL_SYSTEM_STATE_GUI.ModificaTemperatura += PANEL_SYSTEM_STATE_GUI_ModificaTemperatura;
                 PANEL_SYSTEM_STATE_GUI.Hide();
             }
             catch (Exception ex)
@@ -230,7 +236,9 @@ namespace CTGUI
                 Console.WriteLine(ex.StackTrace);
             }
         }
+        #endregion
 
+        #region eventi pannelli o classi
         private void PANEL_HOME_GUI_ClickImgWeather()
         {
             ApriPannelloWeatherGUI();
@@ -256,6 +264,95 @@ namespace CTGUI
             }
         }
 
+        private void PANEL_SYSTEM_STATE_GUI_ModificaTemperatura(object sender, SystemStateGUI.ModificaTemperaturaArgs e)
+        {
+            try
+            {
+                double temperatura = Double.Parse(e.Temperatura.ToString("n1"));
+                LOGICA_SISTEMA.TEMPERATURA_MINIMA = temperatura;
+                if (DB != null)
+                {
+                    var item = DB.TBlValorETemperaTURaManualE.Single(x => x.ID == 1);
+                    item.DataModIfIca = DateTime.Now;
+                    item.ValorE = temperatura;
+                    DB.SubmitChanges(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private void LETTURA_TEMPERATURA_CambioTemperatura(object sender, LetturaTemperatura.CambioTemperaturaArgs e)
+        {
+            try
+            {
+                double temperatura = Double.Parse(e.Temperatura.ToString("n1"));
+                LOGICA_SISTEMA.TEMPERATURA_LETTA = temperatura;
+                this.Invoke(new DelegateTwoString(PANEL_HOME_GUI.SetTemperatura), e.Temperatura.ToString("n1"), "°C");
+                if (DB != null)
+                {
+                    DB.TBlRegisTRaZionITemperaTURa.InsertOnSubmit
+                        (
+                            new TBlRegisTRaZionITemperaTURa
+                            {
+                                ID = 0,
+                                DataRegisTRaZionE = DateTime.Now,
+                                ValorE = temperatura
+                            }
+                        );
+                    DB.SubmitChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+
+        }
+
+        private void LOGICA_SISTEMA_CambioStatoCaldaia(object sender, LogicaSistema.CambioStatoCaldaiaArgs e)
+        {
+            try
+            {
+                int evento = 0;
+                if (e.StatoCaldaia == StatoCaldaia.OFF)
+                {
+                    PANEL_HOME_GUI.HideImgSystema();
+                    evento = TipoEvento.SPEGNIMENTO_CALDAIA;
+                }
+                else if (e.StatoCaldaia == StatoCaldaia.ON_HEAT)
+                {
+                    PANEL_HOME_GUI.ShowImgSystema();
+                    evento = TipoEvento.ATTIVAZIONE_CALDAIA;
+                }
+
+                if (DB != null)
+                {
+                    DB.TBlEventI.InsertOnSubmit
+                        (
+                            new TBlEventI
+                            {
+                                ID = 0,
+                                DataEventO = DateTime.Now,
+                                TipOEventO = evento
+                            }
+                        );
+                    DB.SubmitChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+        #endregion
+
         private void imageSinistraAlto_Click(object sender, EventArgs e)
         {
             try
@@ -279,7 +376,6 @@ namespace CTGUI
 
         }
         
-
         #region ShowPANEL
         public void ShowPANEL_TIME()
         {
@@ -362,6 +458,7 @@ namespace CTGUI
         #endregion
 
         //metodi GUI
+        
         public void MuoviMenuSinistra(bool p, int PIXEL)
         {
             DATA_ULTIMA_OPERAZIONE = DateTime.Now;
@@ -369,6 +466,7 @@ namespace CTGUI
             PANEL_MUOVI_MENU.BringToFront();
         }
 
+        #region apertura e chiusura pannelli
         public void ApriPannelloWeatherGUI()
         {
             try
@@ -450,8 +548,6 @@ namespace CTGUI
                 Console.WriteLine(ex.StackTrace);
             }
         }
-
-        //metodi di stato
-        
+        #endregion
     }
 }

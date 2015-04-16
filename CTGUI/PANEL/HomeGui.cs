@@ -133,7 +133,6 @@ namespace CTGUI.PANEL
                 Console.WriteLine(ex.StackTrace);
             }
         }
-
         public void SetStatoSistema(int statoSistema)
         {
             try
@@ -148,6 +147,14 @@ namespace CTGUI.PANEL
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
+        }
+        public void ShowImgSystema()
+        {
+            imgSystem.Show();
+        }
+        public void HideImgSystema()
+        {
+            imgSystem.Hide();
         }
         #endregion
 

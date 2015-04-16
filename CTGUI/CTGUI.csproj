@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\CTDB.cs" />
+    <Compile Include="LOGICA\LetturaTemperatura.cs" />
     <Compile Include="LOGICA\LogicaSistema.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -138,6 +139,7 @@
     <Compile Include="UTILS\StatoCaldaia.cs" />
     <Compile Include="UTILS\StatoSistema.cs" />
     <Compile Include="UTILS\StatoVisualizzazione.cs" />
+    <Compile Include="UTILS\TipoEvento.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

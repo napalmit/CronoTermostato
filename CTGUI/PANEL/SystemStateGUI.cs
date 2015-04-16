@@ -61,7 +61,7 @@ namespace CTGUI.PANEL
                 {
                     ModificaTemperaturaArgs modificaTemperatura = new ModificaTemperaturaArgs();
                     modificaTemperatura.Temperatura = valore;
-                    if (this.ModificaTemperatura != null)
+                    if (modificaTemperatura != null)
                     {
                         lblManualTemperature.Text = string.Format("{0:0.0}", Math.Truncate(valore * 10) / 10);
                         this.ModificaTemperatura(this, modificaTemperatura);
@@ -86,7 +86,7 @@ namespace CTGUI.PANEL
                 {
                     ModificaTemperaturaArgs modificaTemperatura = new ModificaTemperaturaArgs();
                     modificaTemperatura.Temperatura = valore;
-                    if (this.ModificaTemperatura != null)
+                    if (modificaTemperatura != null)
                     {
                         lblManualTemperature.Text = string.Format("{0:0.0}", Math.Truncate(valore * 10) / 10);
                         this.ModificaTemperatura(this, modificaTemperatura);

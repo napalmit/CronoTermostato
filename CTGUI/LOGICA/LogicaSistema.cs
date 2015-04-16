@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CTGUI.UTILS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,66 +7,80 @@ using System.Timers;
 
 namespace CTGUI.LOGICA
 {
-    
     public class LogicaSistema
     {
         //public event
-        public event EventHandler<CambioTemperaturaArgs> CambioTemperatura;
-
-        //public 
-        public int STATO_SISTEMA { get; set; }
-        public int STATO_CALDAIA { get; set; }
+        public event EventHandler<CambioStatoCaldaiaArgs> CambioStatoCaldaia;
 
         //private timer
-        private System.Timers.Timer TIMER_TEMPERATURA;
+        private System.Timers.Timer TIMER_LOGICA;
 
-        //private
-        private float TEMPERATURA = 0;
+        //public
+        public int STATO_SISTEMA { get; set; } //AUTO / MANUAL
+        public int __STATO_CALDAIA { get; set; } // ON/OFF
+        public double TEMPERATURA_LETTA { get; set; }
+        public double TEMPERATURA_MINIMA { get; set; }
 
         public LogicaSistema()
         {
+            TIMER_LOGICA = new System.Timers.Timer(1000); // ogni secondo
+            TIMER_LOGICA.Elapsed += new ElapsedEventHandler(TIMER_LOGICA_Elapsed);
+            TIMER_LOGICA.Enabled = true;
+        }
+
+        private void TIMER_LOGICA_Elapsed(object sender, ElapsedEventArgs e)
+        {
             try
             {
-                TIMER_TEMPERATURA = new System.Timers.Timer(1000); // aggiorno la temperatura ogni secondo
-                TIMER_TEMPERATURA.Elapsed += new ElapsedEventHandler(TIMER_TEMPERATURA_Elapsed);
-                TIMER_TEMPERATURA.Enabled = true;
+                if (STATO_SISTEMA == StatoSistema.AUTO)
+                {
+                    //verifica fasce
+                }
+                else if (STATO_SISTEMA == StatoSistema.MANUAL)
+                {
+                    //verifica temperatura 
+                    if (TEMPERATURA_LETTA >= TEMPERATURA_MINIMA)
+                    {
+                        if (__STATO_CALDAIA == StatoCaldaia.ON_HEAT)
+                        {
+                            Console.WriteLine("SPENGO");
+                            __STATO_CALDAIA = StatoCaldaia.OFF;
+
+                            CambioStatoCaldaiaArgs cambioStatoCaldaiaArgs = new CambioStatoCaldaiaArgs();
+                            cambioStatoCaldaiaArgs.StatoCaldaia = __STATO_CALDAIA;
+                            if (cambioStatoCaldaiaArgs != null)
+                                this.CambioStatoCaldaia(this, cambioStatoCaldaiaArgs);
+                        }                            
+                    }
+                    else if (TEMPERATURA_LETTA < TEMPERATURA_MINIMA)
+                    {
+                        if (__STATO_CALDAIA == StatoCaldaia.OFF)
+                        {
+                            Console.WriteLine("ACCENDO");
+                            __STATO_CALDAIA = StatoCaldaia.ON_HEAT;
+
+                            CambioStatoCaldaiaArgs cambioStatoCaldaiaArgs = new CambioStatoCaldaiaArgs();
+                            cambioStatoCaldaiaArgs.StatoCaldaia = __STATO_CALDAIA;
+                            if (cambioStatoCaldaiaArgs != null)
+                                this.CambioStatoCaldaia(this, cambioStatoCaldaiaArgs);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-
-            
         }
 
-        private void TIMER_TEMPERATURA_Elapsed(object sender, ElapsedEventArgs e)
+        public class CambioStatoCaldaiaArgs : EventArgs
         {
-            try
-            {
-                //aggiorno la temperatura
-                int test1 = new Random().Next(18, 20);
-                int test2 = new Random().Next(0, 9);
-                CambioTemperaturaArgs cambioTemperaturaArgs = new CambioTemperaturaArgs();
-                cambioTemperaturaArgs.Temperatura = Single.Parse(test1 + "," + test2);
-                TEMPERATURA = cambioTemperaturaArgs.Temperatura;
-                if (cambioTemperaturaArgs != null)
-                    this.CambioTemperatura(this, cambioTemperaturaArgs);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-        }
-
-        public class CambioTemperaturaArgs : EventArgs
-        {
-            public float Temperatura
+            public int StatoCaldaia
             {
                 set;
                 get;
             }
-        }  
+        } 
     }
 }

@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <Database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="main" Class="Main" BaseType="DbLinq.Data.Linq.DataContext" Provider="Sqlite" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="main.tbl_eventi" Member="TBlEventI">
+    <Type Name="TBlEventI">
+      <Column Name="data_evento" Member="DataEventO" Storage="_dataEventO" Type="System.DateTime" DbType="DATETIME" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tipo_evento" Member="TipOEventO" Storage="_tipOeVentO" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="main.tbl_registrazioni_temperatura" Member="TBlRegisTRaZionITemperaTURa">
     <Type Name="TBlRegisTRaZionITemperaTURa">
       <Column Name="data_registrazione" Member="DataRegisTRaZionE" Storage="_dataRegisTrAZionE" Type="System.DateTime" DbType="DATETIME" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
@@ -12,6 +19,12 @@
       <Column Name="data_modifica" Member="DataModIfIca" Storage="_dataModIfIca" Type="System.DateTime" DbType="DATETIME" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
       <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="valore" Member="ValorE" Storage="_valorE" Type="System.Double" DbType="DOUBLE" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="main.tipo_evento" Member="TipOEventO">
+    <Type Name="TipOEventO">
+      <Column Name="descrizione" Member="DesCrIZionE" Storage="_desCrIzIonE" Type="System.String" DbType="VARCHAR" IsPrimaryKey="false" IsDbGenerated="false" CanBeNull="true" />
+      <Column Name="id" Member="ID" Storage="_id" Type="System.Int32" DbType="INTEGER" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
